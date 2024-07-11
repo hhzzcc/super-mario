@@ -1,25 +1,26 @@
-import { baseMarioResources } from "../utils/loadResources";
+import { bulletMarioResources } from "../utils/loadResources";
 
-export class BaseMario {
+export class BulletMario {
   frame = 0;
   actionType = "static";
 
   constructor() {
     this.resources = {
-      static: [baseMarioResources[0]],
-      jumpLeft: [baseMarioResources[1]],
-      jumpRight: [baseMarioResources[2]],
+      static: [bulletMarioResources[0]],
+      jumpLeft: [bulletMarioResources[1]],
+      jumpRight: [bulletMarioResources[2]],
       left: [
-        baseMarioResources[3],
-        baseMarioResources[4],
-        baseMarioResources[5],
+        bulletMarioResources[3],
+        bulletMarioResources[4],
+        bulletMarioResources[5],
       ],
       right: [
-        baseMarioResources[6],
-        baseMarioResources[7],
-        baseMarioResources[8],
+        bulletMarioResources[6],
+        bulletMarioResources[7],
+        bulletMarioResources[8],
       ],
-      die: [baseMarioResources[9]],
+      attackLeft: [bulletMarioResources[9]],
+      attackRight: [bulletMarioResources[10]],
     };
   }
 

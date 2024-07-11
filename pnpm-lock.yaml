@@ -55,6 +55,9 @@ devDependencies:
   less-loader:
     specifier: ^8.0.0
     version: 8.0.0(less@4.0.0)(webpack@5.92.1)
+  lodash-es:
+    specifier: 4.17.21
+    version: 4.17.21
   prettier:
     specifier: ^2.4.1
     version: 2.8.8
@@ -5369,6 +5372,10 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       p-locate: 4.1.0
+    dev: true
+
+  /lodash-es@4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
     dev: true
 
   /lodash.debounce@4.0.8:

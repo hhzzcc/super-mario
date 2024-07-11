@@ -31,6 +31,43 @@ function loadBaseMarioResources() {
   ]);
 }
 
+function loadBigMarioResources() {
+  return loadImages([
+    "imgs/mario/big/static/static.jpg",
+
+    "imgs/mario/big/jump/jump-left.jpg",
+    "imgs/mario/big/jump/jump-right.jpg",
+
+    "imgs/mario/big/left/frame-1.jpg",
+    "imgs/mario/big/left/frame-2.jpg",
+    "imgs/mario/big/left/frame-3.jpg",
+
+    "imgs/mario/big/right/frame-1.jpg",
+    "imgs/mario/big/right/frame-2.jpg",
+    "imgs/mario/big/right/frame-3.jpg",
+  ]);
+}
+
+function loadBulletMarioResources() {
+  return loadImages([
+    "imgs/mario/bullet/static/static.jpg",
+
+    "imgs/mario/bullet/jump/jump-left.jpg",
+    "imgs/mario/bullet/jump/jump-right.jpg",
+
+    "imgs/mario/bullet/left/frame-1.jpg",
+    "imgs/mario/bullet/left/frame-2.jpg",
+    "imgs/mario/bullet/left/frame-3.jpg",
+
+    "imgs/mario/bullet/right/frame-1.jpg",
+    "imgs/mario/bullet/right/frame-2.jpg",
+    "imgs/mario/bullet/right/frame-3.jpg",
+
+    "imgs/mario/bullet/attack/left.jpg",
+    "imgs/mario/bullet/attack/right.jpg",
+  ]);
+}
+
 function loadBackgroundResources() {
   return loadImages(["imgs/scene/scene.jpg"]);
 }
@@ -48,6 +85,28 @@ function loadBuildingAskResources() {
     "imgs/building/ask/frame-5.jpg",
     "imgs/building/ask/frame-6.jpg",
     "imgs/building/ask/empty.jpg",
+  ]);
+}
+
+function loadBuildingFlowerResources() {
+  return loadImages([
+    "imgs/props/flow/frame-1.jpg",
+    "imgs/props/flow/frame-2.jpg",
+    "imgs/props/flow/frame-3.jpg",
+    "imgs/props/flow/frame-4.jpg",
+  ]);
+}
+
+function loadBuildingGrowMushroomResources() {
+  return loadImages(["/imgs/props/grow-mushroom/frame-1.jpg"]);
+}
+
+function loadBuildingBulletResources() {
+  return loadImages([
+    "/imgs/bullet/frame-1.jpg",
+    "/imgs/bullet/frame-2.jpg",
+    "/imgs/bullet/frame-3.jpg",
+    "/imgs/bullet/frame-4.jpg",
   ]);
 }
 
@@ -90,19 +149,34 @@ function loadBuildingAskResources() {
 
 export let backgroundResources;
 export let baseMarioResources;
+export let bigMarioResources;
+export let bulletMarioResources;
+export let buildingBulletResources;
 export let buildingLandResources;
 export let buildingAskResources;
+export let buildingFlowerResources;
+export let buildingGrowMushroomResources;
 
 export async function loadAllResources() {
   [
     backgroundResources,
     baseMarioResources,
+    bigMarioResources,
+    bulletMarioResources,
+    buildingBulletResources,
     buildingLandResources,
     buildingAskResources,
+    buildingFlowerResources,
+    buildingGrowMushroomResources,
   ] = await Promise.all([
     loadBackgroundResources(),
     loadBaseMarioResources(),
+    loadBigMarioResources(),
+    loadBulletMarioResources(),
+    loadBuildingBulletResources(),
     loadBuildingLandResources(),
     loadBuildingAskResources(),
+    loadBuildingFlowerResources(),
+    loadBuildingGrowMushroomResources(),
   ]);
 }

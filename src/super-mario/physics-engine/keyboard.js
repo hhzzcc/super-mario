@@ -1,6 +1,7 @@
 export class Keyboard {
   xDirection;
   yDirection;
+  pressBlank = false;
 
   constructor() {
     document.addEventListener("keydown", this.handleKeydown);
@@ -8,7 +9,6 @@ export class Keyboard {
   }
 
   handleKeydown = (e) => {
-    // e.preventDefault();
     switch (e.keyCode) {
       case 38:
         this.yDirection = "top";
@@ -19,8 +19,9 @@ export class Keyboard {
       case 39:
         this.xDirection = "right";
         break;
-      //   case 32:
-      // handler(obj, "Bullet", true);
+      case 32:
+        this.pressBlank = true;
+        break;
     }
   };
 
@@ -32,6 +33,9 @@ export class Keyboard {
       case 37:
       case 39:
         this.xDirection = undefined;
+        break;
+      case 32:
+        this.pressBlank = false;
         break;
     }
   };

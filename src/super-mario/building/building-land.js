@@ -1,29 +1,33 @@
 import { buildingLandResources } from "../utils/loadResources";
-import { Rect } from "leafer-ui";
+import { SIZE } from "../constants";
+import { Sprite } from "../sprite";
 
-const WIDTH = 32;
-const HEIGHT = 32;
-export class BuildingLand {
-  constructor(options) {
-    const { x, y } = options;
-    this.x = x;
-    this.y = y;
-    this.width = WIDTH;
-    this.height = HEIGHT;
-    this._core = new Rect({
+export class BuildingLand extends Sprite {
+  constructor({ x, y }) {
+    super({
       x,
       y,
-      width: WIDTH,
-      height: HEIGHT,
-      fill: {
-        type: "image",
-        url: buildingLandResources[0].src,
-        mode: "fit",
-      },
+      width: SIZE,
+      height: SIZE,
     });
+
+    this.resources = {
+      default: [buildingLandResources[0]],
+    };
+    this.type = "default";
   }
 
-  getCore() {
-    return this._core;
+  getInfo() {
+    const resource = this.resources[this.type][~~this.frame];
+    this.frame =
+      this.frame >= this.resources[this.type].length - 1 ? 0 : this.frame + 0.1;
+
+    return {
+      resource,
+      x: this.x,
+      y: this.y,
+      width: this.width,
+      height: this.height,
+    };
   }
 }

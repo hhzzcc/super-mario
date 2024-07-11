@@ -1,9 +1,9 @@
-import { buildingAskResources } from "../utils/loadResources";
-import { Sprite } from "../sprite";
+import { buildingFlowerResources } from "../utils/loadResources";
 import { SIZE } from "../constants";
+import { Sprite } from "../sprite";
 
 const COLLECT_OFFSET = 6;
-export class BuildingAsk extends Sprite {
+export class BuildingFlower extends Sprite {
   constructor({ x, y }) {
     super({
       x,
@@ -15,27 +15,24 @@ export class BuildingAsk extends Sprite {
     this.frame = 0;
     this.collectY = null;
     this.collectStep = 0;
+
     this.resources = {
       default: [
-        buildingAskResources[0],
-        buildingAskResources[1],
-        buildingAskResources[2],
-        buildingAskResources[3],
-        buildingAskResources[4],
-        buildingAskResources[5],
+        buildingFlowerResources[0],
+        buildingFlowerResources[1],
+        buildingFlowerResources[2],
+        buildingFlowerResources[3],
       ],
-      empty: [buildingAskResources[6]],
     };
     this.type = "default";
   }
 
   collect() {
-    if (this.type === "empty") {
+    if (this.isActive) {
       return;
     }
 
-    this.type = "empty";
-    this.frame = 0;
+    this.active();
     this.collectY = this.y - COLLECT_OFFSET;
   }
 
@@ -46,10 +43,10 @@ export class BuildingAsk extends Sprite {
 
     if (this.collectY) {
       this.y = this.collectY;
-      this.collectY++;
+      this.collectY--;
       this.collectStep++;
 
-      if (this.collectStep > COLLECT_OFFSET) {
+      if (this.collectStep >= this.height - COLLECT_OFFSET) {
         this.collectStep = 0;
         this.collectY = null;
       }

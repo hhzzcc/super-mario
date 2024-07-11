@@ -3,16 +3,17 @@ import { backgroundResources } from "../utils/loadResources";
 
 export class Background {
   constructor(options) {
-    const { width: sceneWidth, height: sceneHeight } = options;
+    const { camera } = options;
     const {
       width: imageWidth,
       height: imageHeight,
       src: imageUrl,
     } = backgroundResources[0];
 
+    this._camera = camera;
     this.init({
-      sceneWidth,
-      sceneHeight,
+      sceneWidth: camera.width,
+      sceneHeight: camera.height,
       imageWidth,
       imageHeight,
       imageUrl,
@@ -71,12 +72,11 @@ export class Background {
     return this._core;
   }
 
-  run(options) {
-    const { move } = options;
+  run() {
     const group = this.getCore().children[0];
     // 到达断点，背景图位置重置
     group.set({
-      x: group.x + move <= -this.breakPoint ? 0 : group.x + move,
+      x: -this._camera.x <= -this.breakPoint ? 0 : -this._camera.x,
     });
   }
 }

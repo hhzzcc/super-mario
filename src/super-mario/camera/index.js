@@ -7,17 +7,12 @@ export class Camera {
     this.height = height;
   }
 
-  move(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-
   isInView(options) {
     const { x, y, width, height } = options;
     return (
       x + width >= this.x &&
       x <= this.x + this.width &&
-      y + height >= this.yy &&
+      y + height >= this.y &&
       y <= this.y + this.height
     );
   }
