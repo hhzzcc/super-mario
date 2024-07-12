@@ -39,13 +39,13 @@ export class BuildingAsk extends Sprite {
     this.collectY = this.y - COLLECT_OFFSET;
   }
 
-  getInfo() {
+  draw(context, camera) {
     const resource = this.resources[this.type][~~this.frame];
     this.frame =
       this.frame >= this.resources[this.type].length - 1 ? 0 : this.frame + 0.1;
 
     if (this.collectY) {
-      this.y = this.collectY;
+      // this.y = this.collectY;
       this.collectY++;
       this.collectStep++;
 
@@ -55,12 +55,12 @@ export class BuildingAsk extends Sprite {
       }
     }
 
-    return {
+    context.drawImage(
       resource,
-      x: this.x,
-      y: this.y,
-      width: this.width,
-      height: this.height,
-    };
+      this.x - camera.x,
+      this.collectY || this.y,
+      this.width,
+      this.height
+    );
   }
 }

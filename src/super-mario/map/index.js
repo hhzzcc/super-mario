@@ -2,7 +2,10 @@ import { BuildingLand } from "../building/building-land";
 import { BuildingAsk } from "../building/building-ask";
 import { BuildingFlower } from "../building/building-flower";
 import { BuildingGrowMushroom } from "../building/building-grow-mushroom";
-
+import { BuildingBadMushroom } from "../building/building-bad-mushroom";
+import { BuildingStone } from "../building/building-stone";
+import { BuildingWin } from "../building/building-win";
+import { BuildingGold } from "../building/building-gold";
 export class Map {
   constructor() {}
 
@@ -36,6 +39,30 @@ export class Map {
           );
           break;
 
+        case "building-stone":
+          statics.push(
+            new BuildingStone({
+              x: v.x,
+              y: v.y,
+            })
+          );
+          break;
+        case "building-win":
+          statics.push(
+            new BuildingWin({
+              x: v.x,
+              y: v.y,
+            })
+          );
+          break;
+        case "building-gold":
+          statics.push(
+            new BuildingGold({
+              x: v.x,
+              y: v.y,
+            })
+          );
+          break;
         case "building-flower":
           dynamics.push(
             new BuildingFlower({
@@ -44,6 +71,7 @@ export class Map {
             })
           );
           break;
+
         case "building-grow-mushroom":
           dynamics.push(
             new BuildingGrowMushroom({
@@ -51,6 +79,15 @@ export class Map {
               y: v.y,
             })
           );
+          break;
+        case "building-bad-mushroom":
+          dynamics.push(
+            new BuildingBadMushroom({
+              x: v.x,
+              y: v.y,
+            })
+          );
+          break;
       }
     });
 

@@ -1,25 +1,20 @@
+import { BuildingAsk } from "../building/building-ask";
+import { Mario } from "../mario";
+
 export const isCollectBTop = (a, b) => {
-  return (
-    a.vy > 0 &&
-    a.y + a.height + a.vy > b.y &&
-    a.y + a.height + a.vy < b.y + b.height
-  );
+  return a.vy > 0 && a.y + a.height <= b.y;
 };
 
 export const isCollectBBottom = (a, b) => {
-  return a.vy < 0 && a.y + a.vy > b.y && a.y + a.vy < b.y + b.height;
+  return a.vy < 0 && a.y >= b.y + b.height;
 };
 
 export const isCollectBLeft = (a, b) => {
-  return (
-    a.vx > 0 &&
-    a.x + a.width + a.vx > b.x &&
-    a.x + a.width + a.vx < b.x + b.width
-  );
+  return a.vx > 0 && a.x + a.width <= b.x;
 };
 
 export const isCollectBRight = (a, b) => {
-  return a.vx < 0 && a.x + a.vx > b.x && a.x + a.vx < b.x + b.width;
+  return a.vx < 0 && a.x >= b.x + b.width;
 };
 
 export function isCollect(rectA, rectB) {
@@ -28,13 +23,13 @@ export function isCollect(rectA, rectB) {
   const w1 = rectA.width;
   const h1 = rectA.height;
 
-  const x2 = rectB.x + rectB.vx;
-  const y2 = rectB.y + rectB.vy;
+  const x2 = rectB.x + (rectB.vx || 0);
+  const y2 = rectB.y + (rectB.vy || 0);
   const w2 = rectB.width;
   const h2 = rectB.height;
 
   // 判断两个矩形是否碰撞
   const isCollide =
-    x1 < x2 + w2 && x1 + w1 > x2 && y1 < y2 + h2 && y1 + h1 > y2;
+    x1 <= x2 + w2 && x1 + w1 >= x2 && y1 <= y2 + h2 && y1 + h1 >= y2;
   return isCollide;
 }

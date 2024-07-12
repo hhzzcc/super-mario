@@ -54,15 +54,8 @@ export class Scene {
         this.dynamicSprites.splice(i, 1);
       }
       // 只绘制相机内的精灵
-      else if (this._camera.isInView(child) && child.getInfo) {
-        const { resource, x, y, width, height } = child.getInfo();
-        this._canvas.context.drawImage(
-          resource,
-          x - this._camera.x,
-          y,
-          width,
-          height
-        );
+      else if (this._camera.isInView(child)) {
+        child.draw(this._canvas.context, this._camera);
       }
     }
 
@@ -75,15 +68,8 @@ export class Scene {
         delete this.staticSpriteMaps[`${child.x}-${child.y}`];
       }
       // 只绘制相机内的精灵
-      else if (this._camera.isInView(child) && child.getInfo) {
-        const { resource, x, y, width, height } = child.getInfo();
-        this._canvas.context.drawImage(
-          resource,
-          x - this._camera.x,
-          y,
-          width,
-          height
-        );
+      else if (this._camera.isInView(child)) {
+        child.draw(this._canvas.context, this._camera);
       }
     }
 

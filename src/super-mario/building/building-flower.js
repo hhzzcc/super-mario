@@ -32,11 +32,10 @@ export class BuildingFlower extends Sprite {
       return;
     }
 
-    this.active();
     this.collectY = this.y - COLLECT_OFFSET;
   }
 
-  getInfo() {
+  draw(context, camera) {
     const resource = this.resources[this.type][~~this.frame];
     this.frame =
       this.frame >= this.resources[this.type].length - 1 ? 0 : this.frame + 0.1;
@@ -46,18 +45,19 @@ export class BuildingFlower extends Sprite {
       this.collectY--;
       this.collectStep++;
 
-      if (this.collectStep >= this.height - COLLECT_OFFSET) {
+      if (this.collectStep > this.height - COLLECT_OFFSET) {
         this.collectStep = 0;
         this.collectY = null;
+        this.active();
       }
     }
 
-    return {
+    context.drawImage(
       resource,
-      x: this.x,
-      y: this.y,
-      width: this.width,
-      height: this.height,
-    };
+      this.x - camera.x,
+      this.y,
+      this.width,
+      this.height
+    );
   }
 }

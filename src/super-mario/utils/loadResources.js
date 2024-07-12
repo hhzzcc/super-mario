@@ -76,6 +76,14 @@ function loadBuildingLandResources() {
   return loadImages(["imgs/building/land/land.jpg"]);
 }
 
+function loadBuildingStoneResources() {
+  return loadImages(["imgs/building/stone/stone.jpg"]);
+}
+
+function loadBuildingStoneBornResources() {
+  return loadImages(["imgs/building/stone/stone-born.jpg"]);
+}
+
 function loadBuildingAskResources() {
   return loadImages([
     "imgs/building/ask/frame-1.jpg",
@@ -88,6 +96,14 @@ function loadBuildingAskResources() {
   ]);
 }
 
+function loadBuildingWinResources() {
+  return loadImages([
+    "imgs/building/win/flag.jpg",
+    "imgs/building/win/round.jpg",
+    "imgs/building/win/rod.jpg",
+  ]);
+}
+
 function loadBuildingFlowerResources() {
   return loadImages([
     "imgs/props/flow/frame-1.jpg",
@@ -97,8 +113,29 @@ function loadBuildingFlowerResources() {
   ]);
 }
 
+function loadBuildingGoldResources() {
+  return loadImages([
+    "imgs/props/gold/frame-1.jpg",
+    "imgs/props/gold/frame-2.jpg",
+    "imgs/props/gold/frame-3.jpg",
+    "imgs/props/gold/frame-4.jpg",
+    "imgs/props/gold/frame-5.jpg",
+    "imgs/props/gold/frame-6.jpg",
+  ]);
+}
+
 function loadBuildingGrowMushroomResources() {
   return loadImages(["/imgs/props/grow-mushroom/frame-1.jpg"]);
+}
+
+function loadBuildingBadMushroomResources() {
+  return loadImages([
+    "/imgs/bad/mushroom/frame-1.jpg",
+    "/imgs/bad/mushroom/frame-2.jpg",
+    "/imgs/bad/mushroom/die-frame-1.jpg",
+    "/imgs/bad/mushroom/die-frame-2.jpg",
+    "/imgs/bad/mushroom/die.jpg",
+  ]);
 }
 
 function loadBuildingBulletResources() {
@@ -153,9 +190,14 @@ export let bigMarioResources;
 export let bulletMarioResources;
 export let buildingBulletResources;
 export let buildingLandResources;
+export let buildingStoneResources;
+export let buildingStoneBornResources;
 export let buildingAskResources;
 export let buildingFlowerResources;
+export let buildingGoldResources;
 export let buildingGrowMushroomResources;
+export let buildingBadMushroomResources;
+export let buildingWinResources;
 
 export async function loadAllResources() {
   [
@@ -165,9 +207,14 @@ export async function loadAllResources() {
     bulletMarioResources,
     buildingBulletResources,
     buildingLandResources,
+    buildingStoneResources,
+    buildingStoneBornResources,
     buildingAskResources,
     buildingFlowerResources,
+    buildingGoldResources,
     buildingGrowMushroomResources,
+    buildingBadMushroomResources,
+    buildingWinResources,
   ] = await Promise.all([
     loadBackgroundResources(),
     loadBaseMarioResources(),
@@ -175,8 +222,13 @@ export async function loadAllResources() {
     loadBulletMarioResources(),
     loadBuildingBulletResources(),
     loadBuildingLandResources(),
+    loadBuildingStoneResources(),
+    loadBuildingStoneBornResources(),
     loadBuildingAskResources(),
     loadBuildingFlowerResources(),
+    loadBuildingGoldResources(),
     loadBuildingGrowMushroomResources(),
+    loadBuildingBadMushroomResources(),
+    loadBuildingWinResources(),
   ]);
 }

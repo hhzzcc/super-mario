@@ -16,7 +16,12 @@ export class Sprite {
     this.isActive = true;
   }
 
+  unActive() {
+    this.isActive = false;
+  }
+
   destroy() {
+    this.unActive();
     this.isDestroy = true;
   }
 }

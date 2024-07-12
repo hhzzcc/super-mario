@@ -1,9 +1,9 @@
-import { buildingGrowMushroomResources } from "../utils/loadResources";
-import { SIZE } from "../constants";
+import { buildingStoneResources } from "../utils/loadResources";
 import { Sprite } from "../sprite";
+import { SIZE } from "../constants";
 
 const COLLECT_OFFSET = 6;
-export class BuildingGrowMushroom extends Sprite {
+export class BuildingStone extends Sprite {
   constructor({ x, y }) {
     super({
       x,
@@ -17,34 +17,24 @@ export class BuildingGrowMushroom extends Sprite {
   }
 
   collect() {
-    if (this.isActive) {
-      return;
-    }
-
     this.collectY = this.y - COLLECT_OFFSET;
   }
 
   draw(context, camera) {
     if (this.collectY) {
-      this.y = this.collectY;
-      this.collectY--;
+      this.collectY++;
       this.collectStep++;
 
-      if (this.collectStep > this.height - COLLECT_OFFSET) {
+      if (this.collectStep > COLLECT_OFFSET) {
         this.collectStep = 0;
         this.collectY = null;
-        this.vx = -1;
-        this.active();
       }
     }
 
-    this.x += this.vx;
-    this.y += this.vy;
-
     context.drawImage(
-      buildingGrowMushroomResources[0],
+      buildingStoneResources[0],
       this.x - camera.x,
-      this.y,
+      this.collectY || this.y,
       this.width,
       this.height
     );

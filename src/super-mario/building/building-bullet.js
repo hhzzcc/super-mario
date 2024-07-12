@@ -8,23 +8,19 @@ export class BuildingBullet extends Sprite {
     super({ x, y, width: SIZE / 2, height: SIZE / 2, vx, vy });
 
     this.frame = 0;
-    this.resources = {
-      default: [
-        buildingBulletResources[0],
-        buildingBulletResources[1],
-        buildingBulletResources[2],
-        buildingBulletResources[3],
-      ],
-    };
+    this.resources = [
+      buildingBulletResources[0],
+      buildingBulletResources[1],
+      buildingBulletResources[2],
+      buildingBulletResources[3],
+    ];
     this.active();
-    this.type = "default";
     this.step = 0;
   }
 
-  getInfo() {
-    const resource = this.resources[this.type][~~this.frame];
-    this.frame =
-      this.frame >= this.resources[this.type].length - 1 ? 0 : this.frame + 0.1;
+  draw(context, camera) {
+    const resource = this.resources[~~this.frame];
+    this.frame = this.frame >= this.resources.length - 1 ? 0 : this.frame + 0.1;
 
     this.x += this.vx;
     this.y += this.vy;
@@ -34,12 +30,12 @@ export class BuildingBullet extends Sprite {
       this.destroy();
     }
 
-    return {
+    context.drawImage(
       resource,
-      x: this.x,
-      y: this.y,
-      width: this.width,
-      height: this.height,
-    };
+      this.x - camera.x,
+      this.y,
+      this.width,
+      this.height
+    );
   }
 }

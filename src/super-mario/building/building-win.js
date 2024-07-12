@@ -1,0 +1,43 @@
+import { buildingWinResources } from "../utils/loadResources";
+import { SIZE } from "../constants";
+import { Sprite } from "../sprite";
+
+export class BuildingWin extends Sprite {
+  constructor({ x, y }) {
+    super({
+      x,
+      y,
+      width: SIZE,
+      height: SIZE,
+    });
+  }
+
+  draw(context, camera) {
+    this.height = camera.height - SIZE;
+    context.drawImage(
+      buildingWinResources[0],
+      this.x - camera.x - SIZE / 2,
+      this.y,
+      SIZE,
+      SIZE
+    );
+
+    context.drawImage(
+      buildingWinResources[1],
+      this.x - camera.x,
+      this.y - SIZE / 2,
+      SIZE,
+      SIZE
+    );
+
+    for (let i = 0; i < this.height - SIZE; i++) {
+      context.drawImage(
+        buildingWinResources[2],
+        this.x - camera.x,
+        this.y - SIZE / 2 + SIZE * (i + 1),
+        SIZE,
+        SIZE
+      );
+    }
+  }
+}

@@ -9,7 +9,7 @@ export const data = {
     { type: "building-land", x: 64, y: 448 },
     // { type: "building-land", x: 96, y: 416 },
     { type: "building-land", x: 96, y: 448 },
-    { type: "building-land", x: 128, y: 416 },
+    { type: "building-ask", x: 128, y: 416 },
     { type: "building-land", x: 128, y: 448 },
     { type: "building-land", x: 160, y: 416 },
     { type: "building-land", x: 160, y: 448 },
@@ -71,6 +71,10 @@ export const data = {
     { type: "building-stone", x: 352, y: 288 },
     { type: "building-stone", x: 384, y: 288 },
     { type: "building-stone", x: 416, y: 288 },
+
+    { type: "building-bad-mushroom", x: 416, y: 200 },
+    { type: "building-bad-mushroom", x: 440, y: 200 },
+    { type: "building-bad-mushroom", x: 470, y: 200 },
     { type: "building-ask", x: 1024, y: 352 },
     { type: "building-ask", x: 1056, y: 352 },
     { type: "building-stone", x: 1088, y: 288 },
@@ -235,6 +239,6 @@ export const data = {
     // { type: "building-WinRod", x: 704, y: 320 },
     // { type: "building-WinRod", x: 704, y: 352 },
     // { type: "building-WinRod", x: 704, y: 384 },
-    // { type: "building-Win", x: 704, y: 32 },
+    { type: "building-win", x: 704, y: 32 },
   ],
 };

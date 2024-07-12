@@ -1,4 +1,4 @@
-import { Leafer, App } from "leafer-ui";
+import { App } from "leafer-ui";
 import { Scene } from "../scene";
 import { Camera } from "../camera";
 import { Map } from "../map";
@@ -11,15 +11,13 @@ import { MARIO_VIEW_OFFSET } from "../constants";
 export class Renderer {
   constructor(options) {
     const { view } = options;
-    const sceneWidth = view.offsetWidth;
-    const sceneHeight = view.offsetHeight;
     const app = new App({ view });
 
     const camera = new Camera({
       x: 0,
       y: 0,
-      width: sceneWidth,
-      height: sceneHeight,
+      width: view.offsetWidth,
+      height: view.offsetHeight,
     });
 
     const background = new Background({ camera });
@@ -48,6 +46,7 @@ export class Renderer {
     scene.addDynamicSprites(mario);
     app.add(scene.getCore());
 
+    this._app = app;
     this._scene = scene;
     this._background = background;
     this._camera = camera;
@@ -55,7 +54,17 @@ export class Renderer {
     this._physicsEngine = new PhysicsEngine();
   }
 
-  run() {
+  run(onEnd, onWin) {
+    if (this._mario.isDie) {
+      onEnd();
+      return false;
+    }
+
+    if (this._mario.isWin) {
+      onWin();
+      return false;
+    }
+
     // 运行物理引擎
     this._physicsEngine.run({
       camera: this._camera,
@@ -72,6 +81,10 @@ export class Renderer {
     this._camera.x =
       this._mario.x < MARIO_VIEW_OFFSET ? 0 : this._mario.x - MARIO_VIEW_OFFSET;
 
-    requestAnimationFrame(this.run.bind(this));
+    requestAnimationFrame(this.run.bind(this, onEnd, onWin));
+  }
+
+  destroy() {
+    this._app.destroy();
   }
 }
