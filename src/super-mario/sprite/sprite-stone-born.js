@@ -1,8 +1,8 @@
-import { Sprite } from "../sprite";
+import { StaticSprite } from "./static-sprite";
 import { SIZE } from "../constants";
-import { buildingStoneBornResources } from "../utils/loadResources";
+import { spriteStoneBornResources } from "../utils/loadResources";
 
-export class BuildingStoneBorn extends Sprite {
+export class SpriteStoneBorn extends StaticSprite {
   constructor(options) {
     const width = SIZE / 2;
     const height = SIZE / 2;
@@ -44,7 +44,7 @@ export class BuildingStoneBorn extends Sprite {
         0.1 * this.animatedX * this.animatedX - b * this.animatedX;
 
       context.drawImage(
-        buildingStoneBornResources[0],
+        spriteStoneBornResources[0],
         this.beginX - this.animatedX - camera.x,
         this.beginY + this.animatedY,
         this.width,
@@ -59,7 +59,7 @@ export class BuildingStoneBorn extends Sprite {
         0.1 * this.animatedX * this.animatedX - b * this.animatedX;
 
       context.drawImage(
-        buildingStoneBornResources[0],
+        spriteStoneBornResources[0],
         this.beginX + this.animatedX - camera.x,
         this.beginY + this.animatedY,
         this.width,

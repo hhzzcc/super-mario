@@ -1,8 +1,8 @@
-import { buildingLandResources } from "../utils/loadResources";
+import { spriteLandResources } from "../utils/loadResources";
 import { SIZE } from "../constants";
-import { Sprite } from "../sprite";
+import { StaticSprite } from "./static-sprite";
 
-export class BuildingLand extends Sprite {
+export class SpriteLand extends StaticSprite {
   constructor({ x, y }) {
     super({
       x,
@@ -14,7 +14,7 @@ export class BuildingLand extends Sprite {
 
   draw(context, camera) {
     context.drawImage(
-      buildingLandResources[0],
+      spriteLandResources[0],
       this.x - camera.x,
       this.y,
       this.width,

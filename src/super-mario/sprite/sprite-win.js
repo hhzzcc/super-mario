@@ -1,8 +1,8 @@
-import { buildingWinResources } from "../utils/loadResources";
+import { spriteWinResources } from "../utils/loadResources";
 import { SIZE } from "../constants";
-import { Sprite } from "../sprite";
+import { StaticSprite } from "./static-sprite";
 
-export class BuildingWin extends Sprite {
+export class SpriteWin extends StaticSprite {
   constructor({ x, y }) {
     super({
       x,
@@ -15,7 +15,7 @@ export class BuildingWin extends Sprite {
   draw(context, camera) {
     this.height = camera.height - SIZE;
     context.drawImage(
-      buildingWinResources[0],
+      spriteWinResources[0],
       this.x - camera.x - SIZE / 2,
       this.y,
       SIZE,
@@ -23,7 +23,7 @@ export class BuildingWin extends Sprite {
     );
 
     context.drawImage(
-      buildingWinResources[1],
+      spriteWinResources[1],
       this.x - camera.x,
       this.y - SIZE / 2,
       SIZE,
@@ -32,7 +32,7 @@ export class BuildingWin extends Sprite {
 
     for (let i = 0; i < this.height - SIZE; i++) {
       context.drawImage(
-        buildingWinResources[2],
+        spriteWinResources[2],
         this.x - camera.x,
         this.y - SIZE / 2 + SIZE * (i + 1),
         SIZE,

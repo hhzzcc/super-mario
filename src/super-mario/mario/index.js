@@ -2,9 +2,9 @@ import { BaseMario } from "./base";
 import { BigMario } from "./big";
 import { BulletMario } from "./bullet";
 
-import { Sprite } from "../sprite";
 import { SIZE } from "../constants";
-import { BuildingBullet } from "../building/building-bullet";
+import { SpriteBullet } from "../sprite/sprite-bullet";
+import { DynamicSprite } from "../sprite/dynamic-sprite";
 
 function getActionTypeBySpeed(vx, vy, isAttack, isDie) {
   if (isDie) {
@@ -39,7 +39,7 @@ function getActionTypeBySpeed(vx, vy, isAttack, isDie) {
   }
 }
 
-export class Mario extends Sprite {
+export class Mario extends DynamicSprite {
   constructor({ x, y }) {
     super({
       x,
@@ -82,7 +82,7 @@ export class Mario extends Sprite {
     }
     this.isAttack = true;
     // 添加子弹
-    return new BuildingBullet({
+    return new SpriteBullet({
       x: this.x + this.width,
       y: this.y,
     });

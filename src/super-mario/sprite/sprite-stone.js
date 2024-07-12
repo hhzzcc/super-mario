@@ -1,9 +1,9 @@
-import { buildingStoneResources } from "../utils/loadResources";
-import { Sprite } from "../sprite";
+import { spriteStoneResources } from "../utils/loadResources";
+import { StaticSprite } from "./static-sprite";
 import { SIZE } from "../constants";
 
 const COLLECT_OFFSET = 6;
-export class BuildingStone extends Sprite {
+export class SpriteStone extends StaticSprite {
   constructor({ x, y }) {
     super({
       x,
@@ -32,7 +32,7 @@ export class BuildingStone extends Sprite {
     }
 
     context.drawImage(
-      buildingStoneResources[0],
+      spriteStoneResources[0],
       this.x - camera.x,
       this.collectY || this.y,
       this.width,

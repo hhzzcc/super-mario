@@ -1,8 +1,8 @@
-import { buildingBadMushroomResources } from "../utils/loadResources";
+import { spriteBadMushroomResources } from "../utils/loadResources";
 import { SIZE } from "../constants";
-import { Sprite } from "../sprite";
+import { DynamicSprite } from "./dynamic-sprite";
 
-export class BuildingBadMushroom extends Sprite {
+export class SpriteBadMushroom extends DynamicSprite {
   constructor({ x, y }) {
     super({
       x,
@@ -17,16 +17,13 @@ export class BuildingBadMushroom extends Sprite {
     this.vy = 0;
 
     this.resources = {
-      default: [
-        buildingBadMushroomResources[0],
-        buildingBadMushroomResources[1],
-      ],
+      default: [spriteBadMushroomResources[0], spriteBadMushroomResources[1]],
 
       dieByBullet: [
-        buildingBadMushroomResources[2],
-        buildingBadMushroomResources[3],
+        spriteBadMushroomResources[2],
+        spriteBadMushroomResources[3],
       ],
-      dieByTrample: [buildingBadMushroomResources[4]],
+      dieByTrample: [spriteBadMushroomResources[4]],
     };
     this.type = "default";
     this.active();

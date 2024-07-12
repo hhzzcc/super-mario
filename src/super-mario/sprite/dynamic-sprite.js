@@ -1,4 +1,4 @@
-export class Sprite {
+export class DynamicSprite {
   isActive = false;
   isDestroy = false;
 

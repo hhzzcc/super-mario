@@ -72,15 +72,15 @@ function loadBackgroundResources() {
   return loadImages(["imgs/scene/scene.jpg"]);
 }
 
-function loadBuildingLandResources() {
+function loadSpriteLandResources() {
   return loadImages(["imgs/building/land/land.jpg"]);
 }
 
-function loadBuildingStoneResources() {
+function loadSpriteStoneResources() {
   return loadImages(["imgs/building/stone/stone.jpg"]);
 }
 
-function loadBuildingStoneBornResources() {
+function loadSpriteStoneBornResources() {
   return loadImages(["imgs/building/stone/stone-born.jpg"]);
 }
 
@@ -96,7 +96,7 @@ function loadBuildingAskResources() {
   ]);
 }
 
-function loadBuildingWinResources() {
+function loadSpriteWinResources() {
   return loadImages([
     "imgs/building/win/flag.jpg",
     "imgs/building/win/round.jpg",
@@ -104,7 +104,7 @@ function loadBuildingWinResources() {
   ]);
 }
 
-function loadBuildingFlowerResources() {
+function loadSpriteFlowerResources() {
   return loadImages([
     "imgs/props/flow/frame-1.jpg",
     "imgs/props/flow/frame-2.jpg",
@@ -113,7 +113,7 @@ function loadBuildingFlowerResources() {
   ]);
 }
 
-function loadBuildingGoldResources() {
+function loadSpriteGoldResources() {
   return loadImages([
     "imgs/props/gold/frame-1.jpg",
     "imgs/props/gold/frame-2.jpg",
@@ -124,11 +124,11 @@ function loadBuildingGoldResources() {
   ]);
 }
 
-function loadBuildingGrowMushroomResources() {
+function loadSpriteGrowMushroomResources() {
   return loadImages(["/imgs/props/grow-mushroom/frame-1.jpg"]);
 }
 
-function loadBuildingBadMushroomResources() {
+function loadSpriteBadMushroomResources() {
   return loadImages([
     "/imgs/bad/mushroom/frame-1.jpg",
     "/imgs/bad/mushroom/frame-2.jpg",
@@ -138,7 +138,7 @@ function loadBuildingBadMushroomResources() {
   ]);
 }
 
-function loadBuildingBulletResources() {
+function loadSpriteBulletResources() {
   return loadImages([
     "/imgs/bullet/frame-1.jpg",
     "/imgs/bullet/frame-2.jpg",
@@ -188,16 +188,16 @@ export let backgroundResources;
 export let baseMarioResources;
 export let bigMarioResources;
 export let bulletMarioResources;
-export let buildingBulletResources;
-export let buildingLandResources;
-export let buildingStoneResources;
-export let buildingStoneBornResources;
-export let buildingAskResources;
-export let buildingFlowerResources;
-export let buildingGoldResources;
-export let buildingGrowMushroomResources;
-export let buildingBadMushroomResources;
-export let buildingWinResources;
+export let spriteBulletResources;
+export let spriteLandResources;
+export let spriteStoneResources;
+export let spriteStoneBornResources;
+export let SpriteAskResources;
+export let spriteFlowerResources;
+export let spriteGoldResources;
+export let spriteGrowMushroomResources;
+export let spriteBadMushroomResources;
+export let spriteWinResources;
 
 export async function loadAllResources() {
   [
@@ -205,30 +205,30 @@ export async function loadAllResources() {
     baseMarioResources,
     bigMarioResources,
     bulletMarioResources,
-    buildingBulletResources,
-    buildingLandResources,
-    buildingStoneResources,
-    buildingStoneBornResources,
-    buildingAskResources,
-    buildingFlowerResources,
-    buildingGoldResources,
-    buildingGrowMushroomResources,
-    buildingBadMushroomResources,
-    buildingWinResources,
+    spriteBulletResources,
+    spriteLandResources,
+    spriteStoneResources,
+    spriteStoneBornResources,
+    SpriteAskResources,
+    spriteFlowerResources,
+    spriteGoldResources,
+    spriteGrowMushroomResources,
+    spriteBadMushroomResources,
+    spriteWinResources,
   ] = await Promise.all([
     loadBackgroundResources(),
     loadBaseMarioResources(),
     loadBigMarioResources(),
     loadBulletMarioResources(),
-    loadBuildingBulletResources(),
-    loadBuildingLandResources(),
-    loadBuildingStoneResources(),
-    loadBuildingStoneBornResources(),
+    loadSpriteBulletResources(),
+    loadSpriteLandResources(),
+    loadSpriteStoneResources(),
+    loadSpriteStoneBornResources(),
     loadBuildingAskResources(),
-    loadBuildingFlowerResources(),
-    loadBuildingGoldResources(),
-    loadBuildingGrowMushroomResources(),
-    loadBuildingBadMushroomResources(),
-    loadBuildingWinResources(),
+    loadSpriteFlowerResources(),
+    loadSpriteGoldResources(),
+    loadSpriteGrowMushroomResources(),
+    loadSpriteBadMushroomResources(),
+    loadSpriteWinResources(),
   ]);
 }

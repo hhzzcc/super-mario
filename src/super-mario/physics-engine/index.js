@@ -1,28 +1,24 @@
 import { Mario } from "../mario";
 import { Keyboard } from "./keyboard";
 import {
-  // isCollectLeftRight,
-  // isCollectTopBottom,
   isCollectBTop,
   isCollectBBottom,
   isCollectBLeft,
   isCollectBRight,
   isCollect,
 } from "./collect";
-import { BuildingAsk } from "../building/building-ask";
-import { BuildingFlower } from "../building/building-flower";
-import { BuildingGrowMushroom } from "../building/building-grow-mushroom";
-import { BuildingBullet } from "../building/building-bullet";
+import { SpriteAsk } from "../sprite/sprite-ask";
+import { SpriteFlower } from "../sprite/sprite-flower";
+import { SpriteGrowMushroom } from "../sprite/sprite-grow-mushroom";
+import { SpriteBullet } from "../sprite/sprite-bullet";
 import { throttle } from "lodash-es";
-import { BuildingBadMushroom } from "../building/building-bad-mushroom";
+import { SpriteBadMushroom } from "../sprite/sprite-bad-mushroom";
 import { Jumping } from "./jumping";
-import { BuildingStone } from "../building/building-stone";
-import { BuildingStoneBorn } from "../building/building-stone-born";
-import { BuildingWin } from "../building/building-win";
-import { BuildingGold } from "../building/building-gold";
-
-const SIZE = 32;
-const G = 0.4;
+import { SpriteStone } from "../sprite/sprite-stone";
+import { SpriteStoneBorn } from "../sprite/sprite-stone-born";
+import { SpriteWin } from "../sprite/sprite-win";
+import { SpriteGold } from "../sprite/sprite-gold";
+import { SIZE, G } from "../constants";
 
 const handleMarioAttack = throttle((scene, mario) => {
   const bullet = mario.attack();
@@ -56,7 +52,7 @@ export class PhysicsEngine {
           height: dynamicSprite.height,
         })
       ) {
-        if (dynamicSprite instanceof BuildingBullet) {
+        if (dynamicSprite instanceof SpriteBullet) {
           dynamicSprite.destroy();
         }
         continue;
@@ -85,7 +81,7 @@ export class PhysicsEngine {
       }
 
       // 自由落体
-      else if (!(dynamicSprite instanceof BuildingBullet)) {
+      else if (!(dynamicSprite instanceof SpriteBullet)) {
         // 最大速度不超过10
         dynamicSprite.vy = Math.min(10, dynamicSprite.vy + G);
       }
@@ -135,14 +131,14 @@ export class PhysicsEngine {
           ) {
             // 胜利
             if (dynamicSprite instanceof Mario) {
-              if (staticSprite instanceof BuildingWin) {
+              if (staticSprite instanceof SpriteWin) {
                 dynamicSprite.win();
                 return;
               }
             }
 
             // 吃金币
-            if (staticSprite instanceof BuildingGold) {
+            if (staticSprite instanceof SpriteGold) {
               staticSprite.destroy();
               continue;
             }
@@ -152,7 +148,7 @@ export class PhysicsEngine {
 
               // 头顶碎石砖
               if (
-                staticSprite instanceof BuildingStone &&
+                staticSprite instanceof SpriteStone &&
                 dynamicSprite instanceof Mario &&
                 dynamicSprite.growType !== "base"
               ) {
@@ -160,7 +156,7 @@ export class PhysicsEngine {
 
                 for (let i = 0; i < 4; i++) {
                   scene.addDynamicSprites(
-                    new BuildingStoneBorn({
+                    new SpriteStoneBorn({
                       x: staticSprite.x,
                       y: staticSprite.y,
                       index: i,
@@ -168,8 +164,8 @@ export class PhysicsEngine {
                   );
                 }
               } else if (
-                staticSprite instanceof BuildingAsk ||
-                staticSprite instanceof BuildingLand
+                staticSprite instanceof SpriteAsk ||
+                staticSprite instanceof SpriteStone
               ) {
                 staticSprite.hit();
               }
@@ -210,12 +206,12 @@ export class PhysicsEngine {
     if (dynamicSprite instanceof Mario) {
       // 成长花、成长蘑菇
       if (
-        otherDynamicSprite instanceof BuildingFlower ||
-        otherDynamicSprite instanceof BuildingGrowMushroom
+        otherDynamicSprite instanceof SpriteFlower ||
+        otherDynamicSprite instanceof SpriteGrowMushroom
       ) {
         this.handleGetProps(dynamicSprite, otherDynamicSprite);
       } else if (
-        otherDynamicSprite instanceof BuildingBadMushroom &&
+        otherDynamicSprite instanceof SpriteBadMushroom &&
         otherDynamicSprite.isActive
       ) {
         if (isCollectBTop(dynamicSprite, otherDynamicSprite)) {
@@ -230,8 +226,8 @@ export class PhysicsEngine {
 
     // 子弹击中敌人
     if (
-      dynamicSprite instanceof BuildingBullet &&
-      otherDynamicSprite instanceof BuildingBadMushroom
+      dynamicSprite instanceof SpriteBullet &&
+      otherDynamicSprite instanceof SpriteBadMushroom
     ) {
       dynamicSprite.destroy();
       otherDynamicSprite.dieByBullet();
@@ -243,9 +239,9 @@ export class PhysicsEngine {
     if (otherDynamicSprite.isActive) {
       otherDynamicSprite.destroy();
 
-      if (otherDynamicSprite instanceof BuildingGrowMushroom) {
+      if (otherDynamicSprite instanceof SpriteGrowMushroom) {
         dynamicSprite.grow();
-      } else if (otherDynamicSprite instanceof BuildingFlower) {
+      } else if (otherDynamicSprite instanceof SpriteFlower) {
         dynamicSprite.bullet();
       }
     }
@@ -263,7 +259,7 @@ export class PhysicsEngine {
     dynamicSprite.y = staticSprite.y + staticSprite.height;
 
     // 子弹反弹
-    if (dynamicSprite instanceof BuildingBullet) {
+    if (dynamicSprite instanceof SpriteBullet) {
       dynamicSprite.vy = -dynamicSprite.vy;
     } // 击落跳跃中的精灵
     else if (jumpSprite && jumpSprite.jumping) {
@@ -277,7 +273,7 @@ export class PhysicsEngine {
     dynamicSprite.y = staticSprite.y - dynamicSprite.height;
 
     // 子弹反弹
-    if (dynamicSprite instanceof BuildingBullet) {
+    if (dynamicSprite instanceof SpriteBullet) {
       dynamicSprite.vy = -dynamicSprite.vy;
     } else {
       dynamicSprite.vy = 0;
@@ -290,11 +286,11 @@ export class PhysicsEngine {
 
     // 蘑菇碰撞后，朝相反方向行动
     if (
-      dynamicSprite instanceof BuildingGrowMushroom ||
-      dynamicSprite instanceof BuildingBadMushroom
+      dynamicSprite instanceof SpriteGrowMushroom ||
+      dynamicSprite instanceof SpriteBadMushroom
     ) {
       dynamicSprite.vx = -dynamicSprite.vx;
-    } else if (dynamicSprite instanceof BuildingBullet) {
+    } else if (dynamicSprite instanceof SpriteBullet) {
       dynamicSprite.destroy();
     } else {
       dynamicSprite.vx = 0;
@@ -307,11 +303,11 @@ export class PhysicsEngine {
 
     // 蘑菇碰撞后，朝相反方向行动
     if (
-      dynamicSprite instanceof BuildingGrowMushroom ||
-      dynamicSprite instanceof BuildingBadMushroom
+      dynamicSprite instanceof SpriteGrowMushroom ||
+      dynamicSprite instanceof SpriteBadMushroom
     ) {
       dynamicSprite.vx = -dynamicSprite.vx;
-    } else if (dynamicSprite instanceof BuildingBullet) {
+    } else if (dynamicSprite instanceof SpriteBullet) {
       dynamicSprite.destroy();
     } else {
       dynamicSprite.vx = 0;

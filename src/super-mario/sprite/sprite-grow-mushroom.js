@@ -1,9 +1,9 @@
-import { buildingGrowMushroomResources } from "../utils/loadResources";
+import { spriteGrowMushroomResources } from "../utils/loadResources";
 import { SIZE } from "../constants";
-import { Sprite } from "../sprite";
+import { DynamicSprite } from "./dynamic-sprite";
 
 const COLLECT_OFFSET = 6;
-export class BuildingGrowMushroom extends Sprite {
+export class SpriteGrowMushroom extends DynamicSprite {
   constructor({ x, y }) {
     super({
       x,
@@ -42,7 +42,7 @@ export class BuildingGrowMushroom extends Sprite {
     this.y += this.vy;
 
     context.drawImage(
-      buildingGrowMushroomResources[0],
+      spriteGrowMushroomResources[0],
       this.x - camera.x,
       this.y,
       this.width,

@@ -1,9 +1,9 @@
-import { buildingAskResources } from "../utils/loadResources";
-import { Sprite } from "../sprite";
+import { SpriteAskResources } from "../utils/loadResources";
 import { SIZE } from "../constants";
+import { StaticSprite } from "./static-sprite";
 
 const COLLECT_OFFSET = 6;
-export class BuildingAsk extends Sprite {
+export class SpriteAsk extends StaticSprite {
   constructor({ x, y }) {
     super({
       x,
@@ -17,14 +17,14 @@ export class BuildingAsk extends Sprite {
     this.collectStep = 0;
     this.resources = {
       default: [
-        buildingAskResources[0],
-        buildingAskResources[1],
-        buildingAskResources[2],
-        buildingAskResources[3],
-        buildingAskResources[4],
-        buildingAskResources[5],
+        SpriteAskResources[0],
+        SpriteAskResources[1],
+        SpriteAskResources[2],
+        SpriteAskResources[3],
+        SpriteAskResources[4],
+        SpriteAskResources[5],
       ],
-      empty: [buildingAskResources[6]],
+      empty: [SpriteAskResources[6]],
     };
     this.type = "default";
   }

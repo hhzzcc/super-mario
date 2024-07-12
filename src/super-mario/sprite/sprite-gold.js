@@ -1,8 +1,8 @@
-import { buildingGoldResources } from "../utils/loadResources";
+import { spriteGoldResources } from "../utils/loadResources";
 import { SIZE } from "../constants";
-import { Sprite } from "../sprite";
+import { StaticSprite } from "./static-sprite";
 
-export class BuildingGold extends Sprite {
+export class SpriteGold extends StaticSprite {
   constructor({ x, y }) {
     super({
       x,
@@ -15,9 +15,9 @@ export class BuildingGold extends Sprite {
   }
 
   draw(context, camera) {
-    const resource = buildingGoldResources[~~this.frame];
+    const resource = spriteGoldResources[~~this.frame];
     this.frame =
-      this.frame >= buildingGoldResources.length - 1 ? 0 : this.frame + 0.1;
+      this.frame >= spriteGoldResources.length - 1 ? 0 : this.frame + 0.1;
 
     context.drawImage(
       resource,

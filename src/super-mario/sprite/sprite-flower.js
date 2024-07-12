@@ -1,9 +1,9 @@
-import { buildingFlowerResources } from "../utils/loadResources";
+import { spriteFlowerResources } from "../utils/loadResources";
 import { SIZE } from "../constants";
-import { Sprite } from "../sprite";
+import { DynamicSprite } from "./dynamic-sprite";
 
 const COLLECT_OFFSET = 6;
-export class BuildingFlower extends Sprite {
+export class SpriteFlower extends DynamicSprite {
   constructor({ x, y }) {
     super({
       x,
@@ -18,10 +18,10 @@ export class BuildingFlower extends Sprite {
 
     this.resources = {
       default: [
-        buildingFlowerResources[0],
-        buildingFlowerResources[1],
-        buildingFlowerResources[2],
-        buildingFlowerResources[3],
+        spriteFlowerResources[0],
+        spriteFlowerResources[1],
+        spriteFlowerResources[2],
+        spriteFlowerResources[3],
       ],
     };
     this.type = "default";

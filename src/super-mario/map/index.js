@@ -1,11 +1,11 @@
-import { BuildingLand } from "../building/building-land";
-import { BuildingAsk } from "../building/building-ask";
-import { BuildingFlower } from "../building/building-flower";
-import { BuildingGrowMushroom } from "../building/building-grow-mushroom";
-import { BuildingBadMushroom } from "../building/building-bad-mushroom";
-import { BuildingStone } from "../building/building-stone";
-import { BuildingWin } from "../building/building-win";
-import { BuildingGold } from "../building/building-gold";
+import { SpriteLand } from "../sprite/sprite-land";
+import { SpriteAsk } from "../sprite/sprite-ask";
+import { SpriteFlower } from "../sprite/sprite-flower";
+import { SpriteGrowMushroom } from "../sprite/sprite-grow-mushroom";
+import { SpriteBadMushroom } from "../sprite/sprite-bad-mushroom";
+import { SpriteStone } from "../sprite/sprite-stone";
+import { SpriteWin } from "../sprite/sprite-win";
+import { SpriteGold } from "../sprite/sprite-gold";
 export class Map {
   constructor() {}
 
@@ -23,7 +23,7 @@ export class Map {
       switch (v.type) {
         case "building-land":
           statics.push(
-            new BuildingLand({
+            new SpriteLand({
               x: v.x,
               y: v.y,
             })
@@ -32,7 +32,7 @@ export class Map {
 
         case "building-ask":
           statics.push(
-            new BuildingAsk({
+            new SpriteAsk({
               x: v.x,
               y: v.y,
             })
@@ -41,7 +41,7 @@ export class Map {
 
         case "building-stone":
           statics.push(
-            new BuildingStone({
+            new SpriteStone({
               x: v.x,
               y: v.y,
             })
@@ -49,7 +49,7 @@ export class Map {
           break;
         case "building-win":
           statics.push(
-            new BuildingWin({
+            new SpriteWin({
               x: v.x,
               y: v.y,
             })
@@ -57,7 +57,7 @@ export class Map {
           break;
         case "building-gold":
           statics.push(
-            new BuildingGold({
+            new SpriteGold({
               x: v.x,
               y: v.y,
             })
@@ -65,7 +65,7 @@ export class Map {
           break;
         case "building-flower":
           dynamics.push(
-            new BuildingFlower({
+            new SpriteFlower({
               x: v.x,
               y: v.y,
             })
@@ -74,7 +74,7 @@ export class Map {
 
         case "building-grow-mushroom":
           dynamics.push(
-            new BuildingGrowMushroom({
+            new SpriteGrowMushroom({
               x: v.x,
               y: v.y,
             })
@@ -82,7 +82,7 @@ export class Map {
           break;
         case "building-bad-mushroom":
           dynamics.push(
-            new BuildingBadMushroom({
+            new SpriteBadMushroom({
               x: v.x,
               y: v.y,
             })

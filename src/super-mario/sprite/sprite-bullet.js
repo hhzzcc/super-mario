@@ -1,18 +1,18 @@
-import { Sprite } from "../sprite";
 import { SIZE } from "../constants";
-import { buildingBulletResources } from "../utils/loadResources";
+import { spriteBulletResources } from "../utils/loadResources";
+import { DynamicSprite } from "./dynamic-sprite";
 
-export class BuildingBullet extends Sprite {
+export class SpriteBullet extends DynamicSprite {
   constructor(options) {
     const { x, y, vx = 8, vy = 4 } = options;
     super({ x, y, width: SIZE / 2, height: SIZE / 2, vx, vy });
 
     this.frame = 0;
     this.resources = [
-      buildingBulletResources[0],
-      buildingBulletResources[1],
-      buildingBulletResources[2],
-      buildingBulletResources[3],
+      spriteBulletResources[0],
+      spriteBulletResources[1],
+      spriteBulletResources[2],
+      spriteBulletResources[3],
     ];
     this.active();
     this.step = 0;
