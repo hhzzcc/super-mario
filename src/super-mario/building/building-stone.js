@@ -16,7 +16,7 @@ export class BuildingStone extends Sprite {
     this.collectStep = 0;
   }
 
-  collect() {
+  hit() {
     this.collectY = this.y - COLLECT_OFFSET;
   }
 

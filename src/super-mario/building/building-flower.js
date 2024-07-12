@@ -27,7 +27,7 @@ export class BuildingFlower extends Sprite {
     this.type = "default";
   }
 
-  collect() {
+  appear() {
     if (this.isActive) {
       return;
     }

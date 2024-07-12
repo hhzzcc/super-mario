@@ -167,8 +167,11 @@ export class PhysicsEngine {
                     })
                   );
                 }
-              } else if (staticSprite.collect) {
-                staticSprite.collect();
+              } else if (
+                staticSprite instanceof BuildingAsk ||
+                staticSprite instanceof BuildingLand
+              ) {
+                staticSprite.hit();
               }
             } else if (isCollectBTop(dynamicSprite, staticSprite)) {
               collectTops.push(staticSprite);
@@ -210,23 +213,7 @@ export class PhysicsEngine {
         otherDynamicSprite instanceof BuildingFlower ||
         otherDynamicSprite instanceof BuildingGrowMushroom
       ) {
-        // 已经激活，销毁
-        if (otherDynamicSprite.isActive) {
-          otherDynamicSprite.destroy();
-
-          if (otherDynamicSprite instanceof BuildingGrowMushroom) {
-            dynamicSprite.grow();
-          } else if (otherDynamicSprite instanceof BuildingFlower) {
-            dynamicSprite.bullet();
-          }
-        }
-        // 头顶未激活，出现
-        else if (
-          !otherDynamicSprite.isActive &&
-          isCollectBBottom(dynamicSprite, otherDynamicSprite)
-        ) {
-          otherDynamicSprite.collect();
-        }
+        this.handleGetProps(dynamicSprite, otherDynamicSprite);
       } else if (
         otherDynamicSprite instanceof BuildingBadMushroom &&
         otherDynamicSprite.isActive
@@ -248,6 +235,26 @@ export class PhysicsEngine {
     ) {
       dynamicSprite.destroy();
       otherDynamicSprite.dieByBullet();
+    }
+  }
+
+  handleGetProps(dynamicSprite, otherDynamicSprite) {
+    // 已经激活，销毁
+    if (otherDynamicSprite.isActive) {
+      otherDynamicSprite.destroy();
+
+      if (otherDynamicSprite instanceof BuildingGrowMushroom) {
+        dynamicSprite.grow();
+      } else if (otherDynamicSprite instanceof BuildingFlower) {
+        dynamicSprite.bullet();
+      }
+    }
+    // 头顶未激活，出现
+    else if (
+      !otherDynamicSprite.isActive &&
+      isCollectBBottom(dynamicSprite, otherDynamicSprite)
+    ) {
+      otherDynamicSprite.appear();
     }
   }
 

@@ -16,7 +16,7 @@ export class BuildingGrowMushroom extends Sprite {
     this.collectStep = 0;
   }
 
-  collect() {
+  appear() {
     if (this.isActive) {
       return;
     }

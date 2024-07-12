@@ -29,7 +29,7 @@ export class BuildingAsk extends Sprite {
     this.type = "default";
   }
 
-  collect() {
+  hit() {
     if (this.type === "empty") {
       return;
     }
@@ -45,7 +45,6 @@ export class BuildingAsk extends Sprite {
       this.frame >= this.resources[this.type].length - 1 ? 0 : this.frame + 0.1;
 
     if (this.collectY) {
-      // this.y = this.collectY;
       this.collectY++;
       this.collectStep++;
 
