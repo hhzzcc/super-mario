@@ -18,7 +18,7 @@
 
     <div :class="$style.Content">
       <div :class="$style.Header">
-        <a href="https://github.com/hhzzcc">Github</a>
+        <a href="https://github.com/hhzzcc/super-mario">Github</a>
       </div>
       <div :class="$style.Game">
         <div v-if="loading" :class="$style.Loading">资源加载中...</div>
