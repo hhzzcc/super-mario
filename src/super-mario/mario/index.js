@@ -9,34 +9,39 @@ import { DynamicSprite } from "../sprite/dynamic-sprite";
 function getActionTypeBySpeed(vx, vy, isAttack, isDie) {
   if (isDie) {
     return "die";
-  } else if (vx === 0 && vy === 0) {
+  }
+
+  if (isAttack) {
+    if (vx < 0) {
+      return "attackLeft";
+    }
+    return "attackRight";
+  }
+
+  if (vx === 0 && vy === 0) {
     if (isAttack) {
       return "attackRight";
     }
     return "static";
   }
   // 往右边跳
-  else if (vy !== 0 && vx >= 0) {
+
+  if (vy !== 0 && vx >= 0) {
     return "jumpRight";
   }
   // 往左边跳
-  else if (vy !== 0 && vx < 0) {
+
+  if (vy !== 0 && vx < 0) {
     return "jumpLeft";
   }
+
   // 往左边走
-  else if (vy === 0 && vx < 0) {
-    if (isAttack) {
-      return "attackLeft";
-    }
+  if (vy === 0 && vx < 0) {
     return "left";
   }
+
   // 往右边走
-  else {
-    if (isAttack) {
-      return "attackRight";
-    }
-    return "right";
-  }
+  return "right";
 }
 
 export class Mario extends DynamicSprite {
@@ -83,8 +88,9 @@ export class Mario extends DynamicSprite {
     this.isAttack = true;
     // 添加子弹
     return new SpriteBullet({
-      x: this.x + this.width,
+      x: this.vx >= 0 ? this.x + this.width : this.x,
       y: this.y,
+      vx: this.vx >= 0 ? 8 : -8,
     });
   }
 

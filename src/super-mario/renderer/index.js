@@ -4,6 +4,8 @@ import { Camera } from "../camera";
 import { Map } from "../map";
 import { data as mapData } from "../map/datas/map1";
 import { Background } from "../background";
+import { Score } from "../score";
+
 import { Mario } from "../mario";
 import { PhysicsEngine } from "../physics-engine/index";
 import { MARIO_VIEW_OFFSET } from "../constants";
@@ -21,6 +23,7 @@ export class Renderer {
     });
 
     const background = new Background({ camera });
+    const score = new Score({ camera });
 
     const scene = new Scene({ camera });
 
@@ -45,10 +48,12 @@ export class Renderer {
 
     scene.addDynamicSprites(mario);
     app.add(scene.getCore());
+    app.add(score.getCore());
 
     this._app = app;
     this._scene = scene;
     this._background = background;
+    this._score = score;
     this._camera = camera;
     this._mario = mario;
     this._physicsEngine = new PhysicsEngine();
@@ -61,7 +66,7 @@ export class Renderer {
     }
 
     if (this._mario.isWin) {
-      onWin();
+      onWin(this._score.totalScore);
       return false;
     }
 
@@ -69,6 +74,9 @@ export class Renderer {
     this._physicsEngine.run({
       camera: this._camera,
       scene: this._scene,
+      onScore: (...v) => {
+        this._score.add(...v);
+      },
     });
 
     // 运行场景中的精灵
@@ -76,6 +84,8 @@ export class Renderer {
 
     // 运行背景
     this._background.run();
+
+    this._score.run();
 
     // 相机跟随玛丽
     this._camera.x =

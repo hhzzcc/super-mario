@@ -5,7 +5,8 @@
     <div :class="$style.End" v-if="isEnd || isWin">
       <div>
         <div :class="$style.EndTitle">
-          {{ isWin ? "恭喜您过关啦!" : "游戏结束" }}
+          {{ isWin ? "恭喜您过关啦!" : "游戏结束" }}<br />
+          总得分：{{ score }}
         </div>
         <button style="margin-top: 10px" @click="handleStartGame">
           重新开始
@@ -23,6 +24,7 @@ import { loadAllResources } from "@/super-mario/utils/loadResources";
 const viewRef = ref();
 const isEnd = ref(false);
 const isWin = ref(false);
+const score = ref(0);
 
 let renderer;
 
@@ -40,8 +42,9 @@ function handleStartGame() {
     () => {
       isEnd.value = true;
     },
-    () => {
+    (v) => {
       isWin.value = true;
+      score.value = v;
     }
   );
 }

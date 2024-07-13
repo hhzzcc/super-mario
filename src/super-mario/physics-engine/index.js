@@ -37,7 +37,8 @@ export class PhysicsEngine {
   }
 
   run(options) {
-    const { scene, camera } = options;
+    const { scene, camera, onScore } = options;
+    this.onScore = onScore;
     const { staticSpriteMaps, dynamicSprites } = scene;
 
     for (let i = 0; i < dynamicSprites.length; i++) {
@@ -137,9 +138,12 @@ export class PhysicsEngine {
               }
             }
 
-            // 吃金币
+            // 金币
             if (staticSprite instanceof SpriteGold) {
-              staticSprite.destroy();
+              if (dynamicSprite instanceof Mario) {
+                staticSprite.destroy();
+                this.onScore(staticSprite.x, staticSprite.y, staticSprite);
+              }
               continue;
             }
 
@@ -153,7 +157,7 @@ export class PhysicsEngine {
                 dynamicSprite.growType !== "base"
               ) {
                 staticSprite.destroy();
-
+                this.onScore(staticSprite.x, staticSprite.y, staticSprite);
                 for (let i = 0; i < 4; i++) {
                   scene.addDynamicSprites(
                     new SpriteStoneBorn({
@@ -164,16 +168,20 @@ export class PhysicsEngine {
                   );
                 }
               } else if (
-                staticSprite instanceof SpriteAsk ||
-                staticSprite instanceof SpriteStone
+                dynamicSprite instanceof Mario &&
+                (staticSprite instanceof SpriteAsk ||
+                  staticSprite instanceof SpriteStone)
               ) {
                 staticSprite.hit();
               }
-            } else if (isCollectBTop(dynamicSprite, staticSprite)) {
+            }
+            if (isCollectBTop(dynamicSprite, staticSprite)) {
               collectTops.push(staticSprite);
-            } else if (isCollectBRight(dynamicSprite, staticSprite)) {
+            }
+            if (isCollectBRight(dynamicSprite, staticSprite)) {
               collectRights.push(staticSprite);
-            } else if (isCollectBLeft(dynamicSprite, staticSprite)) {
+            }
+            if (isCollectBLeft(dynamicSprite, staticSprite)) {
               collectLefts.push(staticSprite);
             }
           }
@@ -186,7 +194,9 @@ export class PhysicsEngine {
           collectBottoms[0],
           jumpSprite
         );
-      } else if (collectTops.length) {
+      }
+
+      if (collectTops.length) {
         this.handleDySpriteCollectStSpriteTop(dynamicSprite, collectTops[0]);
       }
 
@@ -195,7 +205,9 @@ export class PhysicsEngine {
           dynamicSprite,
           collectRights[0]
         );
-      } else if (collectLefts.length) {
+      }
+
+      if (collectLefts.length) {
         this.handleDySpriteCollectStSpriteLeft(dynamicSprite, collectLefts[0]);
       }
     }
@@ -218,6 +230,11 @@ export class PhysicsEngine {
           this.jumping.remove(dynamicSprite);
           this.jumping.add(dynamicSprite, 4);
           otherDynamicSprite.dieByTrample();
+          this.onScore(
+            otherDynamicSprite.x,
+            otherDynamicSprite.y,
+            otherDynamicSprite
+          );
         } else {
           dynamicSprite.die();
         }
@@ -227,10 +244,16 @@ export class PhysicsEngine {
     // 子弹击中敌人
     if (
       dynamicSprite instanceof SpriteBullet &&
-      otherDynamicSprite instanceof SpriteBadMushroom
+      otherDynamicSprite instanceof SpriteBadMushroom &&
+      otherDynamicSprite.isActive
     ) {
       dynamicSprite.destroy();
       otherDynamicSprite.dieByBullet();
+      this.onScore(
+        otherDynamicSprite.x,
+        otherDynamicSprite.y,
+        otherDynamicSprite
+      );
     }
   }
 
@@ -238,6 +261,11 @@ export class PhysicsEngine {
     // 已经激活，销毁
     if (otherDynamicSprite.isActive) {
       otherDynamicSprite.destroy();
+      this.onScore(
+        otherDynamicSprite.x,
+        otherDynamicSprite.y,
+        otherDynamicSprite
+      );
 
       if (otherDynamicSprite instanceof SpriteGrowMushroom) {
         dynamicSprite.grow();
@@ -264,7 +292,9 @@ export class PhysicsEngine {
     } // 击落跳跃中的精灵
     else if (jumpSprite && jumpSprite.jumping) {
       jumpSprite.jumping = false;
-      dynamicSprite.vy = 1;
+      requestAnimationFrame(() => {
+        dynamicSprite.vy = 1;
+      });
     }
   }
 
@@ -318,6 +348,9 @@ export class PhysicsEngine {
   handleKeyBoardControlMario(mario, scene) {
     if (this.keyboard.xDirection === "left") {
       mario.vx = Math.max(-3, mario.vx - 1);
+      if (mario.vx + mario.x < 0) {
+        mario.x = 0;
+      }
     } else if (this.keyboard.xDirection === "right") {
       mario.vx = Math.min(3, mario.vx + 1);
     } else {

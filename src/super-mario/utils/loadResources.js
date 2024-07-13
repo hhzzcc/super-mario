@@ -76,6 +76,10 @@ function loadSpriteLandResources() {
   return loadImages(["imgs/building/land/land.jpg"]);
 }
 
+function loadSpriteRockResources() {
+  return loadImages(["imgs/building/rock/rock.jpg"]);
+}
+
 function loadSpriteStoneResources() {
   return loadImages(["imgs/building/stone/stone.jpg"]);
 }
@@ -84,7 +88,7 @@ function loadSpriteStoneBornResources() {
   return loadImages(["imgs/building/stone/stone-born.jpg"]);
 }
 
-function loadBuildingAskResources() {
+function loadSpriteAskResources() {
   return loadImages([
     "imgs/building/ask/frame-1.jpg",
     "imgs/building/ask/frame-2.jpg",
@@ -190,6 +194,7 @@ export let bigMarioResources;
 export let bulletMarioResources;
 export let spriteBulletResources;
 export let spriteLandResources;
+export let spriteRockResources;
 export let spriteStoneResources;
 export let spriteStoneBornResources;
 export let SpriteAskResources;
@@ -207,6 +212,7 @@ export async function loadAllResources() {
     bulletMarioResources,
     spriteBulletResources,
     spriteLandResources,
+    spriteRockResources,
     spriteStoneResources,
     spriteStoneBornResources,
     SpriteAskResources,
@@ -222,9 +228,10 @@ export async function loadAllResources() {
     loadBulletMarioResources(),
     loadSpriteBulletResources(),
     loadSpriteLandResources(),
+    loadSpriteRockResources(),
     loadSpriteStoneResources(),
     loadSpriteStoneBornResources(),
-    loadBuildingAskResources(),
+    loadSpriteAskResources(),
     loadSpriteFlowerResources(),
     loadSpriteGoldResources(),
     loadSpriteGrowMushroomResources(),

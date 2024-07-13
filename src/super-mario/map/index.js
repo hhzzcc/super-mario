@@ -6,6 +6,7 @@ import { SpriteBadMushroom } from "../sprite/sprite-bad-mushroom";
 import { SpriteStone } from "../sprite/sprite-stone";
 import { SpriteWin } from "../sprite/sprite-win";
 import { SpriteGold } from "../sprite/sprite-gold";
+import { SpriteRock } from "../sprite/sprite-rock";
 export class Map {
   constructor() {}
 
@@ -21,7 +22,7 @@ export class Map {
     const dynamics = [];
     data.forEach((v) => {
       switch (v.type) {
-        case "building-land":
+        case "sprite-land":
           statics.push(
             new SpriteLand({
               x: v.x,
@@ -30,7 +31,7 @@ export class Map {
           );
           break;
 
-        case "building-ask":
+        case "sprite-ask":
           statics.push(
             new SpriteAsk({
               x: v.x,
@@ -39,7 +40,7 @@ export class Map {
           );
           break;
 
-        case "building-stone":
+        case "sprite-stone":
           statics.push(
             new SpriteStone({
               x: v.x,
@@ -47,7 +48,15 @@ export class Map {
             })
           );
           break;
-        case "building-win":
+        case "sprite-rock":
+          statics.push(
+            new SpriteRock({
+              x: v.x,
+              y: v.y,
+            })
+          );
+          break;
+        case "sprite-win":
           statics.push(
             new SpriteWin({
               x: v.x,
@@ -55,7 +64,7 @@ export class Map {
             })
           );
           break;
-        case "building-gold":
+        case "sprite-gold":
           statics.push(
             new SpriteGold({
               x: v.x,
@@ -63,7 +72,7 @@ export class Map {
             })
           );
           break;
-        case "building-flower":
+        case "sprite-flower":
           dynamics.push(
             new SpriteFlower({
               x: v.x,
@@ -72,7 +81,7 @@ export class Map {
           );
           break;
 
-        case "building-grow-mushroom":
+        case "sprite-grow-mushroom":
           dynamics.push(
             new SpriteGrowMushroom({
               x: v.x,
@@ -80,7 +89,7 @@ export class Map {
             })
           );
           break;
-        case "building-bad-mushroom":
+        case "sprite-bad-mushroom":
           dynamics.push(
             new SpriteBadMushroom({
               x: v.x,
