@@ -1,8 +1,6 @@
 ## 超级玛丽
 
-### 体验地址
-
-<a href="https://hhzzcc.github.io/super-mario/dist/index.html#/" _target="blank"></a>
+[体验地址](https://hhzzcc.github.io/super-mario/dist/index.html#/)
 
 ### 项目介绍
 
