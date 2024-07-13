@@ -7,10 +7,37 @@ import { SpriteStone } from "../sprite/sprite-stone";
 import { SpriteWin } from "../sprite/sprite-win";
 import { SpriteGold } from "../sprite/sprite-gold";
 import { SpriteRock } from "../sprite/sprite-rock";
+
+function toKebabCase(str) {
+  return str.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+}
+
 export class Map {
   constructor() {}
 
-  serialization() {}
+  serialization(scene, title) {
+    const mapData = {
+      title,
+      data: [],
+    };
+    scene.dynamicSprites.forEach((sprite) => {
+      mapData.data.push({
+        type: toKebabCase(sprite.constructor.name),
+        x: sprite.x,
+        y: sprite.y,
+      });
+    });
+
+    scene.staticSprites.forEach((sprite) => {
+      mapData.data.push({
+        type: toKebabCase(sprite.constructor.name),
+        x: sprite.x,
+        y: sprite.y,
+      });
+    });
+
+    return mapData;
+  }
 
   deserialization(mapData) {
     const { data } = mapData;

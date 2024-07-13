@@ -51,7 +51,8 @@ export class PhysicsEngine {
           y: dynamicSprite.y,
           width: dynamicSprite.width,
           height: dynamicSprite.height,
-        })
+        }) &&
+        dynamicSprite.y < -200
       ) {
         if (dynamicSprite instanceof SpriteBullet) {
           dynamicSprite.destroy();
@@ -66,6 +67,13 @@ export class PhysicsEngine {
       // 键盘操作人物
       if (dynamicSprite instanceof Mario) {
         this.handleKeyBoardControlMario(dynamicSprite, scene);
+
+        if (
+          dynamicSprite.y + dynamicSprite.height >=
+          camera.y + camera.height
+        ) {
+          dynamicSprite.isDie = true;
+        }
       }
 
       // 上抛运动
@@ -321,7 +329,7 @@ export class PhysicsEngine {
     ) {
       dynamicSprite.vx = -dynamicSprite.vx;
     } else if (dynamicSprite instanceof SpriteBullet) {
-      dynamicSprite.destroy();
+      dynamicSprite.vx = -dynamicSprite.vx;
     } else {
       dynamicSprite.vx = 0;
     }
@@ -338,7 +346,7 @@ export class PhysicsEngine {
     ) {
       dynamicSprite.vx = -dynamicSprite.vx;
     } else if (dynamicSprite instanceof SpriteBullet) {
-      dynamicSprite.destroy();
+      dynamicSprite.vx = -dynamicSprite.vx;
     } else {
       dynamicSprite.vx = 0;
     }
@@ -347,12 +355,12 @@ export class PhysicsEngine {
   // 键盘操作
   handleKeyBoardControlMario(mario, scene) {
     if (this.keyboard.xDirection === "left") {
-      mario.vx = Math.max(-3, mario.vx - 1);
+      mario.vx = Math.max(-4, mario.vx - 0.15);
       if (mario.vx + mario.x < 0) {
         mario.x = 0;
       }
     } else if (this.keyboard.xDirection === "right") {
-      mario.vx = Math.min(3, mario.vx + 1);
+      mario.vx = Math.min(4, mario.vx + 0.15);
     } else {
       mario.vx = 0;
     }

@@ -54,7 +54,7 @@ export class Scene {
         this.dynamicSprites.splice(i, 1);
       }
       // 只绘制相机内的精灵
-      else if (this._camera.isInView(child)) {
+      else if (this._camera.isInView(child) || child.y > -200) {
         child.draw(this._canvas.context, this._camera);
       }
     }

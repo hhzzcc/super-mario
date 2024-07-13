@@ -4,7 +4,7 @@ import { DynamicSprite } from "./dynamic-sprite";
 
 export class SpriteBullet extends DynamicSprite {
   constructor(options) {
-    const { x, y, vx = 8, vy = 4 } = options;
+    const { x, y, vx = 4, vy = 4 } = options;
     super({ x, y, width: SIZE / 2, height: SIZE / 2, vx, vy });
 
     this.frame = 0;
@@ -26,7 +26,7 @@ export class SpriteBullet extends DynamicSprite {
     this.y += this.vy;
     this.step += 1;
 
-    if (this.step >= 100) {
+    if (this.step >= 60) {
       this.destroy();
     }
 
