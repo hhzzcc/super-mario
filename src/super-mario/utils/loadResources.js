@@ -129,64 +129,27 @@ function loadSpriteGoldResources() {
 }
 
 function loadSpriteGrowMushroomResources() {
-  return loadImages(["/imgs/props/grow-mushroom/frame-1.jpg"]);
+  return loadImages(["imgs/props/grow-mushroom/frame-1.jpg"]);
 }
 
 function loadSpriteBadMushroomResources() {
   return loadImages([
-    "/imgs/bad/mushroom/frame-1.jpg",
-    "/imgs/bad/mushroom/frame-2.jpg",
-    "/imgs/bad/mushroom/die-frame-1.jpg",
-    "/imgs/bad/mushroom/die-frame-2.jpg",
-    "/imgs/bad/mushroom/die.jpg",
+    "imgs/bad/mushroom/frame-1.jpg",
+    "imgs/bad/mushroom/frame-2.jpg",
+    "imgs/bad/mushroom/die-frame-1.jpg",
+    "imgs/bad/mushroom/die-frame-2.jpg",
+    "imgs/bad/mushroom/die.jpg",
   ]);
 }
 
 function loadSpriteBulletResources() {
   return loadImages([
-    "/imgs/bullet/frame-1.jpg",
-    "/imgs/bullet/frame-2.jpg",
-    "/imgs/bullet/frame-3.jpg",
-    "/imgs/bullet/frame-4.jpg",
+    "imgs/bullet/frame-1.jpg",
+    "imgs/bullet/frame-2.jpg",
+    "imgs/bullet/frame-3.jpg",
+    "imgs/bullet/frame-4.jpg",
   ]);
 }
-
-// function loadBuildingResources() {
-//   return Promise.all([
-//     loadImages("imgs/building/ask/frame-1.jpg"),
-//     loadImages("imgs/building/ask/frame-2.jpg"),
-//     loadImages("imgs/building/ask/frame-3.jpg"),
-//     loadImages("imgs/building/ask/frame-4.jpg"),
-//     loadImages("imgs/building/ask/frame-5.jpg"),
-//     loadImages("imgs/building/ask/frame-6.jpg"),
-//     loadImages("imgs/building/ask/nothing.jpg"),
-
-//     loadImages("imgs/building/land/land.jpg"),
-//     loadImages("imgs/building/stone/stone.jpg"),
-//     loadImages("imgs/building/rock/rock.jpg"),
-
-//     loadImages("imgs/building/gold/frame-1.jpg"),
-//     loadImages("imgs/building/gold/frame-2.jpg"),
-//     loadImages("imgs/building/gold/frame-3.jpg"),
-//     loadImages("imgs/building/gold/frame-4.jpg"),
-//     loadImages("imgs/building/gold/frame-5.jpg"),
-//     loadImages("imgs/building/gold/frame-6.jpg"),
-
-//     loadImages("imgs/building/flow/frame-1.jpg"),
-//     loadImages("imgs/building/flow/frame-2.jpg"),
-//     loadImages("imgs/building/flow/frame-3.jpg"),
-//     loadImages("imgs/building/flow/frame-4.jpg"),
-
-//     loadImages("imgs/building/pipe/pipelineL.jpg"),
-//     loadImages("imgs/building/pipe/pipelineR.jpg"),
-//     loadImages("imgs/building/pipe/pipelineTopL.jpg"),
-//     loadImages("imgs/building/pipe/pipelineTopR.jpg"),
-
-//     loadImages("imgs/building/win/flag.jpg"),
-//     loadImages("imgs/building/win/round.jpg"),
-//     loadImages("imgs/building/win/rod.jpg"),
-//   ]);
-// }
 
 export let backgroundResources;
 export let baseMarioResources;

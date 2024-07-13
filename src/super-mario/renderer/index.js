@@ -8,10 +8,12 @@ import { Score } from "../score";
 import { Mario } from "../mario";
 import { PhysicsEngine } from "../physics-engine/index";
 import { MARIO_VIEW_OFFSET } from "../constants";
+import { Platform } from "leafer-ui";
 
 export class Renderer {
   constructor(options) {
     const { view, mapData, readonly } = options;
+    Platform.image.crossOrigin = "anonymous";
     const app = new App({ view });
 
     const camera = new Camera({

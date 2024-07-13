@@ -7,7 +7,9 @@
         height: height + 'px',
       }"
     >
-      <div :class="$style.MoveLeft" @click="handleMoveLeft">‹</div>
+      <div :class="$style.MoveLeft" @click="handleMoveLeft" v-if="props.isEdit">
+        ‹
+      </div>
       <div ref="viewRef" style="width: 100%; height: 100%"></div>
 
       <div :class="$style.End" v-if="isFail || isWin">
@@ -42,7 +44,13 @@
           @mouseenter="currentGrid = item"
         ></div>
       </div>
-      <div :class="$style.MoveRight" @click="handleMoveRight">›</div>
+      <div
+        :class="$style.MoveRight"
+        @click="handleMoveRight"
+        v-if="props.isEdit"
+      >
+        ›
+      </div>
     </div>
 
     <AddSprite
