@@ -72,6 +72,7 @@ export class PhysicsEngine {
           dynamicSprite.y + dynamicSprite.height >=
           camera.y + camera.height
         ) {
+          dynamicSprite.die();
           dynamicSprite.isDie = true;
         }
       }
