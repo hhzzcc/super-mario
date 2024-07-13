@@ -1,7 +1,7 @@
 "use strict";
 (self["webpackChunksuper_mario"] = self["webpackChunksuper_mario"] || []).push([[274],{
 
-/***/ 156:
+/***/ 152:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 // ESM COMPAT FLAG
@@ -13917,9 +13917,7 @@ class Map {
       title,
       data: []
     };
-    console.log(scene);
     scene.dynamicSprites.forEach(sprite => {
-      console.log("dd", sprite.constructor.name);
       mapData.data.push({
         type: toKebabCase(sprite.constructor.name),
         x: sprite.x,
@@ -13927,7 +13925,6 @@ class Map {
       });
     });
     scene.staticSprites.forEach(sprite => {
-      console.log("sss", sprite.constructor.name);
       mapData.data.push({
         type: toKebabCase(sprite.constructor.name),
         x: sprite.x,
@@ -14086,7 +14083,7 @@ class Background {
     const group = this.getCore().children[0];
     // 到达断点，背景图位置重置
     group.set({
-      x: -this._camera.x <= -this.breakPoint ? 0 : -this._camera.x
+      x: this._camera.x <= this.breakPoint ? -this._camera.x : this.breakPoint - this._camera.x
     });
   }
 }
@@ -14406,11 +14403,20 @@ class Mario extends DynamicSprite {
         this.isInvincibility = false;
       }, 2000);
     } else {
-      this.isDie = true;
-      this.unActive();
-      this.vy = -1;
-      this.vx = 0;
+      this.died();
     }
+  }
+  died() {
+    if (this.growType !== "base") {
+      this.growType = "base";
+      this.mario = new BaseMario();
+      this.height = SIZE;
+      this.y += SIZE;
+    }
+    this.isDie = true;
+    this.unActive();
+    this.vy = -1;
+    this.vx = 0;
   }
   win() {
     this.isWin = true;
@@ -15233,7 +15239,7 @@ class PhysicsEngine {
       if (dynamicSprite instanceof Mario) {
         this.handleKeyBoardControlMario(dynamicSprite, scene);
         if (dynamicSprite.y + dynamicSprite.height >= camera.y + camera.height) {
-          dynamicSprite.isDie = true;
+          dynamicSprite.died();
         }
       }
 
@@ -17167,10 +17173,10 @@ const Homevue_type_script_setup_true_lang_js_hoisted_3 = {
 });
 ;// CONCATENATED MODULE: ./src/views/Home.vue?vue&type=script&setup=true&lang=js
  
-;// CONCATENATED MODULE: ./node_modules/.pnpm/mini-css-extract-plugin@2.9.0_webpack@5.92.1/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-31.use[0]!./node_modules/.pnpm/css-loader@6.11.0_webpack@5.92.1/node_modules/css-loader/dist/cjs.js??clonedRuleSet-31.use[1]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/.pnpm/postcss-loader@6.2.1_postcss@8.4.39_webpack@5.92.1/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-31.use[2]!./node_modules/.pnpm/less-loader@8.0.0_less@4.0.0_webpack@5.92.1/node_modules/less-loader/dist/cjs.js??clonedRuleSet-31.use[3]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./src/views/Home.vue?vue&type=style&index=0&id=592bd166&lang=less&module=true
+;// CONCATENATED MODULE: ./node_modules/.pnpm/mini-css-extract-plugin@2.9.0_webpack@5.92.1/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-31.use[0]!./node_modules/.pnpm/css-loader@6.11.0_webpack@5.92.1/node_modules/css-loader/dist/cjs.js??clonedRuleSet-31.use[1]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/.pnpm/postcss-loader@6.2.1_postcss@8.4.39_webpack@5.92.1/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-31.use[2]!./node_modules/.pnpm/less-loader@8.0.0_less@4.0.0_webpack@5.92.1/node_modules/less-loader/dist/cjs.js??clonedRuleSet-31.use[3]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./src/views/Home.vue?vue&type=style&index=0&id=650293c3&lang=less&module=true
 // extracted by mini-css-extract-plugin
-/* harmony default export */ var Homevue_type_style_index_0_id_592bd166_lang_less_module_true = ({"Container":"Home_Container_TvPjS","MenuContainer":"Home_MenuContainer_Jpi4d","Menu":"Home_Menu_RXuZa","Btn":"Home_Btn_oOsOI","Content":"Home_Content_JBjb0","Header":"Home_Header_YYyV4","Game":"Home_Game_OzZ_G","Loading":"Home_Loading_rTSCN","Tip":"Home_Tip_rMaU0"});
-;// CONCATENATED MODULE: ./src/views/Home.vue?vue&type=style&index=0&id=592bd166&lang=less&module=true
+/* harmony default export */ var Homevue_type_style_index_0_id_650293c3_lang_less_module_true = ({"Container":"Home_Container_TvPjS","MenuContainer":"Home_MenuContainer_Jpi4d","Menu":"Home_Menu_RXuZa","Btn":"Home_Btn_oOsOI","Content":"Home_Content_JBjb0","Header":"Home_Header_YYyV4","Game":"Home_Game_OzZ_G","Loading":"Home_Loading_rTSCN","Tip":"Home_Tip_rMaU0"});
+;// CONCATENATED MODULE: ./src/views/Home.vue?vue&type=style&index=0&id=650293c3&lang=less&module=true
  
 ;// CONCATENATED MODULE: ./src/views/Home.vue
 
@@ -17178,7 +17184,7 @@ const Homevue_type_script_setup_true_lang_js_hoisted_3 = {
 
 const Home_cssModules = {}
 ;
-Home_cssModules["$style"] = Homevue_type_style_index_0_id_592bd166_lang_less_module_true
+Home_cssModules["$style"] = Homevue_type_style_index_0_id_650293c3_lang_less_module_true
 
 ;
 const Home_exports_ = /*#__PURE__*/(0,exportHelper/* default */.A)(Homevue_type_script_setup_true_lang_js, [['__cssModules',Home_cssModules]])
@@ -17188,4 +17194,4 @@ const Home_exports_ = /*#__PURE__*/(0,exportHelper/* default */.A)(Homevue_type_
 /***/ })
 
 }]);
-//# sourceMappingURL=Home.c6749463.js.map
+//# sourceMappingURL=Home.7270a55c.js.map
