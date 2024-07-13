@@ -109,11 +109,21 @@ export class Mario extends DynamicSprite {
         this.isInvincibility = false;
       }, 2000);
     } else {
-      this.isDie = true;
-      this.unActive();
-      this.vy = -1;
-      this.vx = 0;
+      this.died();
     }
+  }
+
+  died() {
+    if (this.growType !== "base") {
+      this.growType = "base";
+      this.mario = new BaseMario();
+      this.height = SIZE;
+      this.y += SIZE;
+    }
+    this.isDie = true;
+    this.unActive();
+    this.vy = -1;
+    this.vx = 0;
   }
   win() {
     this.isWin = true;
