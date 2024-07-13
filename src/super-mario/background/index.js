@@ -76,7 +76,10 @@ export class Background {
     const group = this.getCore().children[0];
     // 到达断点，背景图位置重置
     group.set({
-      x: -this._camera.x <= -this.breakPoint ? 0 : -this._camera.x,
+      x:
+        this._camera.x <= this.breakPoint
+          ? -this._camera.x
+          : this.breakPoint - this._camera.x,
     });
   }
 }
