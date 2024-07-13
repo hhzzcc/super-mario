@@ -13,7 +13,7 @@ import { Platform } from "leafer-ui";
 export class Renderer {
   constructor(options) {
     const { view, mapData, readonly } = options;
-    Platform.image.crossOrigin = "anonymous";
+    Platform.image.crossOrigin = null;
     const app = new App({ view });
 
     const camera = new Camera({

@@ -36,7 +36,7 @@ import { onMounted, defineEmits } from "vue";
 const emits = defineEmits(["check", "mul-check", "finish"]);
 const list = [
   {
-    imgs: ["/imgs/building/land/land.jpg"],
+    imgs: ["imgs/building/land/land.jpg"],
     handler(scene, x, y) {
       scene.addStaticSprites(
         new SpriteLand({
@@ -48,8 +48,8 @@ const list = [
   },
   {
     imgs: [
-      "/imgs/building/ask/frame-4.jpg",
-      "/imgs/props/grow-mushroom/frame-1.jpg",
+      "imgs/building/ask/frame-4.jpg",
+      "imgs/props/grow-mushroom/frame-1.jpg",
     ],
     handler(scene, x, y) {
       scene.addStaticSprites(
@@ -67,7 +67,7 @@ const list = [
     },
   },
   {
-    imgs: ["/imgs/building/ask/frame-4.jpg", "/imgs/props/flow/frame-1.jpg"],
+    imgs: ["imgs/building/ask/frame-4.jpg", "imgs/props/flow/frame-1.jpg"],
     handler(scene, x, y) {
       scene.addStaticSprites(
         new SpriteAsk({
@@ -84,7 +84,7 @@ const list = [
     },
   },
   {
-    imgs: ["/imgs/building/stone/stone.jpg"],
+    imgs: ["imgs/building/stone/stone.jpg"],
     handler(scene, x, y) {
       scene.addStaticSprites(
         new SpriteStone({
@@ -95,7 +95,7 @@ const list = [
     },
   },
   {
-    imgs: ["/imgs/building/rock/rock.jpg"],
+    imgs: ["imgs/building/rock/rock.jpg"],
     handler(scene, x, y) {
       scene.addStaticSprites(
         new SpriteRock({
@@ -107,7 +107,7 @@ const list = [
   },
 
   {
-    imgs: ["/imgs/bad/mushroom/frame-1.jpg"],
+    imgs: ["imgs/bad/mushroom/frame-1.jpg"],
     handler(scene, x, y) {
       const sprite = new SpriteBadMushroom({
         x,
