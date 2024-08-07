@@ -19,6 +19,17 @@
     <div :class="$style.Content">
       <div :class="$style.Header">
         <a href="https://github.com/hhzzcc/super-mario">Github</a>
+
+        <Popover>
+          <template #content>
+            <img
+              src="https://github.com/user-attachments/assets/ebc290c2-0b8f-4675-a9e0-d317bc4333f1"
+            />
+          </template>
+          <a style="margin-left: 10px" href="javascript:void(0)"
+            >🔥领外卖打车券</a
+          >
+        </Popover>
       </div>
       <div :class="$style.Game">
         <div v-if="loading" :class="$style.Loading">资源加载中...</div>
@@ -49,6 +60,7 @@ import { loadAllResources } from "@/super-mario/utils/loadResources";
 import Mario from "@/components/mario.vue";
 import Menu from "@/components/menu.vue";
 import { data as mapData1 } from "../maps/map1";
+import { Popover } from "ant-design-vue";
 
 const loading = ref(true);
 const showMenu = ref(true);
@@ -118,7 +130,7 @@ onMounted(async () => {
 .Header {
   display: flex;
   align-items: center;
-  height: 32px;
+  height: 64px;
   background-color: #000;
 
   padding: 0 20px;

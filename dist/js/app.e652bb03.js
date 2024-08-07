@@ -2,7 +2,7 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 800:
+/***/ 695:
 /***/ (function(__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) {
 
 
@@ -10,27 +10,52 @@
 var runtime_dom_esm_bundler = __webpack_require__(784);
 // EXTERNAL MODULE: ./node_modules/.pnpm/@vue+runtime-core@3.2.13/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js
 var runtime_core_esm_bundler = __webpack_require__(111);
-;// CONCATENATED MODULE: ./node_modules/.pnpm/thread-loader@3.0.4_webpack@5.92.1/node_modules/thread-loader/dist/cjs.js!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.24.7_webpack@5.92.1/node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[3]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./src/App.vue?vue&type=template&id=5d276472
+// EXTERNAL MODULE: ./node_modules/.pnpm/@vue+shared@3.2.13/node_modules/@vue/shared/dist/shared.esm-bundler.js
+var shared_esm_bundler = __webpack_require__(586);
+;// CONCATENATED MODULE: ./node_modules/.pnpm/thread-loader@3.0.4_webpack@5.92.1/node_modules/thread-loader/dist/cjs.js!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.24.7_webpack@5.92.1/node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./src/App.vue?vue&type=script&setup=true&lang=js
 
-function render(_ctx, _cache) {
-  const _component_router_view = (0,runtime_core_esm_bundler/* resolveComponent */.g2)("router-view");
-  return (0,runtime_core_esm_bundler/* openBlock */.uX)(), (0,runtime_core_esm_bundler/* createBlock */.Wv)(_component_router_view);
-}
-;// CONCATENATED MODULE: ./node_modules/.pnpm/mini-css-extract-plugin@2.9.0_webpack@5.92.1/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-12.use[0]!./node_modules/.pnpm/css-loader@6.11.0_webpack@5.92.1/node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/.pnpm/postcss-loader@6.2.1_postcss@8.4.39_webpack@5.92.1/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./src/App.vue?vue&type=style&index=0&id=5d276472&lang=css
+/* harmony default export */ var Appvue_type_script_setup_true_lang_js = ({
+  setup(__props) {
+    function isMobile() {
+      let flag = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      return flag;
+    }
+    return (_ctx, _cache) => {
+      const _component_router_view = (0,runtime_core_esm_bundler/* resolveComponent */.g2)("router-view");
+      return isMobile() ? ((0,runtime_core_esm_bundler/* openBlock */.uX)(), (0,runtime_core_esm_bundler/* createElementBlock */.CE)("div", {
+        key: 0,
+        class: (0,shared_esm_bundler/* normalizeClass */.C4)(_ctx.$style.Guide)
+      }, "请使用pc端体验超级玛丽哦~", 2)) : ((0,runtime_core_esm_bundler/* openBlock */.uX)(), (0,runtime_core_esm_bundler/* createBlock */.Wv)(_component_router_view, {
+        key: 1
+      }));
+    };
+  }
+});
+;// CONCATENATED MODULE: ./src/App.vue?vue&type=script&setup=true&lang=js
+ 
+;// CONCATENATED MODULE: ./node_modules/.pnpm/mini-css-extract-plugin@2.9.0_webpack@5.92.1/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-12.use[0]!./node_modules/.pnpm/css-loader@6.11.0_webpack@5.92.1/node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/.pnpm/postcss-loader@6.2.1_postcss@8.4.39_webpack@5.92.1/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./src/App.vue?vue&type=style&index=0&id=023591ce&lang=css
 // extracted by mini-css-extract-plugin
 
-;// CONCATENATED MODULE: ./src/App.vue?vue&type=style&index=0&id=5d276472&lang=css
+;// CONCATENATED MODULE: ./src/App.vue?vue&type=style&index=0&id=023591ce&lang=css
 
+;// CONCATENATED MODULE: ./node_modules/.pnpm/mini-css-extract-plugin@2.9.0_webpack@5.92.1/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-31.use[0]!./node_modules/.pnpm/css-loader@6.11.0_webpack@5.92.1/node_modules/css-loader/dist/cjs.js??clonedRuleSet-31.use[1]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/.pnpm/postcss-loader@6.2.1_postcss@8.4.39_webpack@5.92.1/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-31.use[2]!./node_modules/.pnpm/less-loader@8.0.0_less@4.0.0_webpack@5.92.1/node_modules/less-loader/dist/cjs.js??clonedRuleSet-31.use[3]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./src/App.vue?vue&type=style&index=1&id=023591ce&lang=less&module=true
+// extracted by mini-css-extract-plugin
+/* harmony default export */ var Appvue_type_style_index_1_id_023591ce_lang_less_module_true = ({"Guide":"App_Guide_CmycA"});
+;// CONCATENATED MODULE: ./src/App.vue?vue&type=style&index=1&id=023591ce&lang=less&module=true
+ 
 // EXTERNAL MODULE: ./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/exportHelper.js
 var exportHelper = __webpack_require__(727);
 ;// CONCATENATED MODULE: ./src/App.vue
 
-const script = {}
+
 
 ;
+const cssModules = {}
+;
+cssModules["$style"] = Appvue_type_style_index_1_id_023591ce_lang_less_module_true
 
-
-const __exports__ = /*#__PURE__*/(0,exportHelper/* default */.A)(script, [['render',render]])
+;
+const __exports__ = /*#__PURE__*/(0,exportHelper/* default */.A)(Appvue_type_script_setup_true_lang_js, [['__cssModules',cssModules]])
 
 /* harmony default export */ var App = (__exports__);
 // EXTERNAL MODULE: ./node_modules/.pnpm/vue-router@4.0.3_vue@3.2.13/node_modules/vue-router/dist/vue-router.esm-bundler.js
@@ -40,14 +65,17 @@ var vue_router_esm_bundler = __webpack_require__(641);
 const routes = [{
   path: "/",
   name: "Home",
-  component: () => __webpack_require__.e(/* import() | Home */ 274).then(__webpack_require__.bind(__webpack_require__, 152))
+  component: () => __webpack_require__.e(/* import() | Home */ 274).then(__webpack_require__.bind(__webpack_require__, 215))
 }];
 const router = (0,vue_router_esm_bundler/* createRouter */.aE)({
   history: (0,vue_router_esm_bundler/* createWebHashHistory */.Bt)(),
   routes
 });
 /* harmony default export */ var src_router = (router);
+// EXTERNAL MODULE: ./node_modules/.pnpm/ant-design-vue@4.2.3_vue@3.2.13/node_modules/ant-design-vue/dist/reset.css
+var dist_reset = __webpack_require__(725);
 ;// CONCATENATED MODULE: ./src/main.js
+
 
 
 
@@ -149,7 +177,7 @@ const router = (0,vue_router_esm_bundler/* createRouter */.aE)({
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = function(chunkId) {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + "Home" + "." + "7270a55c" + ".js";
+/******/ 			return "js/" + "Home" + "." + "c6cf098a" + ".js";
 /******/ 		};
 /******/ 	}();
 /******/ 	
@@ -158,7 +186,7 @@ const router = (0,vue_router_esm_bundler/* createRouter */.aE)({
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.miniCssF = function(chunkId) {
 /******/ 			// return url for filenames based on template
-/******/ 			return "css/" + "Home" + "." + "3216f629" + ".css";
+/******/ 			return "css/" + "Home" + "." + "7c82cb64" + ".css";
 /******/ 		};
 /******/ 	}();
 /******/ 	
@@ -424,9 +452,9 @@ const router = (0,vue_router_esm_bundler/* createRouter */.aE)({
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [504], function() { return __webpack_require__(800); })
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [504], function() { return __webpack_require__(695); })
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=app.a2c9424a.js.map
+//# sourceMappingURL=app.e652bb03.js.map
