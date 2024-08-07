@@ -1,8 +1,14 @@
+## 给自己打个广告
+
+作者自己弄的生活返利机器人，可以领外卖、打车红包，网购查券等，喜欢可以关注一下哦~
+
+![图片alt](https://github.com/user-attachments/assets/ebc290c2-0b8f-4675-a9e0-d317bc4333f1 "图片title")
+
 ## 超级玛丽
 
 [体验地址](https://hhzzcc.github.io/super-mario/dist/index.html#/)
 
-### 项目介绍
+## 项目介绍
 
 由 leaferjs + vue 编写，支持自定义编辑地图
 
@@ -21,8 +27,4 @@ pnpm install
 pnpm serve
 ```
 
-### 支持一下我
 
-如果对你有帮助，可以请作者喝个咖啡，作者会继续完善
-
-<img src="https://github.com/user-attachments/assets/4a555c12-ec87-4d33-ba28-754c46a7edc1" width="300" align="left" />
