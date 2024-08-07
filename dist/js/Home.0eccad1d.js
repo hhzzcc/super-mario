@@ -1,7 +1,7 @@
 "use strict";
 (self["webpackChunksuper_mario"] = self["webpackChunksuper_mario"] || []).push([[274],{
 
-/***/ 215:
+/***/ 378:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 // ESM COMPAT FLAG
@@ -31235,7 +31235,7 @@ const Homevue_type_script_setup_true_lang_js_hoisted_1 = /*#__PURE__*/(0,runtime
   href: "https://github.com/hhzzcc/super-mario"
 }, "Github", -1);
 const Homevue_type_script_setup_true_lang_js_hoisted_2 = /*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */.Lk)("img", {
-  src: "https://github.com/user-attachments/assets/ebc290c2-0b8f-4675-a9e0-d317bc4333f1"
+  src: "https://aiad-prod.oss-cn-heyuan.aliyuncs.com/public/783dac4cf0234219876add4eb68bc5f4.jpg"
 }, null, -1);
 const Homevue_type_script_setup_true_lang_js_hoisted_3 = /*#__PURE__*/(0,runtime_core_esm_bundler/* createElementVNode */.Lk)("a", {
   style: {
@@ -31318,10 +31318,10 @@ const Homevue_type_script_setup_true_lang_js_hoisted_4 = {
 });
 ;// CONCATENATED MODULE: ./src/views/Home.vue?vue&type=script&setup=true&lang=js
  
-;// CONCATENATED MODULE: ./node_modules/.pnpm/mini-css-extract-plugin@2.9.0_webpack@5.92.1/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-31.use[0]!./node_modules/.pnpm/css-loader@6.11.0_webpack@5.92.1/node_modules/css-loader/dist/cjs.js??clonedRuleSet-31.use[1]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/.pnpm/postcss-loader@6.2.1_postcss@8.4.39_webpack@5.92.1/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-31.use[2]!./node_modules/.pnpm/less-loader@8.0.0_less@4.0.0_webpack@5.92.1/node_modules/less-loader/dist/cjs.js??clonedRuleSet-31.use[3]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./src/views/Home.vue?vue&type=style&index=0&id=12c25708&lang=less&module=true
+;// CONCATENATED MODULE: ./node_modules/.pnpm/mini-css-extract-plugin@2.9.0_webpack@5.92.1/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-31.use[0]!./node_modules/.pnpm/css-loader@6.11.0_webpack@5.92.1/node_modules/css-loader/dist/cjs.js??clonedRuleSet-31.use[1]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/.pnpm/postcss-loader@6.2.1_postcss@8.4.39_webpack@5.92.1/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-31.use[2]!./node_modules/.pnpm/less-loader@8.0.0_less@4.0.0_webpack@5.92.1/node_modules/less-loader/dist/cjs.js??clonedRuleSet-31.use[3]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./src/views/Home.vue?vue&type=style&index=0&id=64a18270&lang=less&module=true
 // extracted by mini-css-extract-plugin
-/* harmony default export */ var Homevue_type_style_index_0_id_12c25708_lang_less_module_true = ({"Container":"Home_Container_TvPjS","MenuContainer":"Home_MenuContainer_Jpi4d","Menu":"Home_Menu_RXuZa","Btn":"Home_Btn_oOsOI","Content":"Home_Content_JBjb0","Header":"Home_Header_YYyV4","Game":"Home_Game_OzZ_G","Loading":"Home_Loading_rTSCN","Tip":"Home_Tip_rMaU0"});
-;// CONCATENATED MODULE: ./src/views/Home.vue?vue&type=style&index=0&id=12c25708&lang=less&module=true
+/* harmony default export */ var Homevue_type_style_index_0_id_64a18270_lang_less_module_true = ({"Container":"Home_Container_TvPjS","MenuContainer":"Home_MenuContainer_Jpi4d","Menu":"Home_Menu_RXuZa","Btn":"Home_Btn_oOsOI","Content":"Home_Content_JBjb0","Header":"Home_Header_YYyV4","Game":"Home_Game_OzZ_G","Loading":"Home_Loading_rTSCN","Tip":"Home_Tip_rMaU0"});
+;// CONCATENATED MODULE: ./src/views/Home.vue?vue&type=style&index=0&id=64a18270&lang=less&module=true
  
 ;// CONCATENATED MODULE: ./src/views/Home.vue
 
@@ -31329,7 +31329,7 @@ const Homevue_type_script_setup_true_lang_js_hoisted_4 = {
 
 const Home_cssModules = {}
 ;
-Home_cssModules["$style"] = Homevue_type_style_index_0_id_12c25708_lang_less_module_true
+Home_cssModules["$style"] = Homevue_type_style_index_0_id_64a18270_lang_less_module_true
 
 ;
 const Home_exports_ = /*#__PURE__*/(0,exportHelper/* default */.A)(Homevue_type_script_setup_true_lang_js, [['__cssModules',Home_cssModules]])
@@ -31339,4 +31339,4 @@ const Home_exports_ = /*#__PURE__*/(0,exportHelper/* default */.A)(Homevue_type_
 /***/ })
 
 }]);
-//# sourceMappingURL=Home.c6cf098a.js.map
+//# sourceMappingURL=Home.0eccad1d.js.map

@@ -23,7 +23,7 @@
         <Popover>
           <template #content>
             <img
-              src="https://github.com/user-attachments/assets/ebc290c2-0b8f-4675-a9e0-d317bc4333f1"
+              src="https://aiad-prod.oss-cn-heyuan.aliyuncs.com/public/783dac4cf0234219876add4eb68bc5f4.jpg"
             />
           </template>
           <a style="margin-left: 10px" href="javascript:void(0)"
