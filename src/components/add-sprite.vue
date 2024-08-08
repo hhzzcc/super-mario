@@ -2,7 +2,7 @@
   <div>
     <div :class="$style.Title">
       请选择要添加的元素
-      <button @click="emits('finish')">编辑完成，生成地图</button>
+      <Button @click="emits('finish')">编辑完成，生成地图</Button>
     </div>
     <div :class="$style.List">
       <div v-for="(item, i) in list" :key="i" @click="emits('check', item)">
@@ -31,6 +31,7 @@ import { SpriteGrowMushroom } from "@/super-mario/sprite/sprite-grow-mushroom";
 import { SpriteLand } from "@/super-mario/sprite/sprite-land";
 import { SpriteRock } from "@/super-mario/sprite/sprite-rock";
 import { SpriteStone } from "@/super-mario/sprite/sprite-stone";
+import { Button } from "ant-design-vue";
 import { onMounted, defineEmits } from "vue";
 
 const emits = defineEmits(["check", "mul-check", "finish"]);
