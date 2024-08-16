@@ -164,6 +164,14 @@ function loadSpriteTurtleResources() {
   ]);
 }
 
+function loadSpriteShellResources() {
+  return loadImages([
+    "imgs/bad/shell/frame-1.jpg",
+    "imgs/bad/shell/frame-2.jpg",
+    "imgs/bad/shell/hide.jpg",
+  ]);
+}
+
 function loadSpriteBulletResources() {
   return loadImages([
     "imgs/bullet/frame-1.jpg",
@@ -189,6 +197,7 @@ export let spriteGrowMushroomResources;
 export let spriteBadMushroomResources;
 export let spriteHorrorResources;
 export let spriteTurtleResources;
+export let spriteShellResources;
 export let spriteWinResources;
 
 export async function loadAllResources() {
@@ -209,6 +218,7 @@ export async function loadAllResources() {
     spriteBadMushroomResources,
     spriteHorrorResources,
     spriteTurtleResources,
+    spriteShellResources,
     spriteWinResources,
   ] = await Promise.all([
     loadBackgroundResources(),
@@ -227,6 +237,7 @@ export async function loadAllResources() {
     loadSpriteBadMushroomResources(),
     loadSpriteHorrorResources(),
     loadSpriteTurtleResources(),
+    loadSpriteShellResources(),
     loadSpriteWinResources(),
   ]);
 }

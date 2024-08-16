@@ -31,6 +31,7 @@ import { SpriteGrowMushroom } from "@/super-mario/sprite/sprite-grow-mushroom";
 import { SpriteHorror } from "@/super-mario/sprite/sprite-horror";
 import { SpriteLand } from "@/super-mario/sprite/sprite-land";
 import { SpriteRock } from "@/super-mario/sprite/sprite-rock";
+import { SpriteShell } from "@/super-mario/sprite/sprite-shell";
 import { SpriteStone } from "@/super-mario/sprite/sprite-stone";
 import { SpriteTurtle } from "@/super-mario/sprite/sprite-turtle";
 import { Button } from "ant-design-vue";
@@ -137,6 +138,17 @@ const list = [
     imgs: ["imgs/bad/turtle/frame-1.jpg"],
     handler(scene, x, y) {
       const sprite = new SpriteTurtle({
+        x,
+        y,
+      });
+      sprite.vx = 0;
+      scene.addDynamicSprites(sprite);
+    },
+  },
+  {
+    imgs: ["imgs/bad/shell/frame-1.jpg"],
+    handler(scene, x, y) {
+      const sprite = new SpriteShell({
         x,
         y,
       });

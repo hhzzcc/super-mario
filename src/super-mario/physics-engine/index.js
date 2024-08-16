@@ -21,6 +21,7 @@ import { SpriteGold } from "../sprite/sprite-gold";
 import { SIZE, G } from "../constants";
 import { SpriteHorror } from "../sprite/sprite-horror";
 import { SpriteTurtle } from "../sprite/sprite-turtle";
+import { SpriteShell } from "../sprite/sprite-shell";
 
 const handleMarioAttack = throttle((scene, mario) => {
   const bullet = mario.attack();
@@ -255,7 +256,8 @@ export class PhysicsEngine {
       }
       // 敌人乌龟
       else if (
-        otherDynamicSprite instanceof SpriteTurtle &&
+        (otherDynamicSprite instanceof SpriteShell ||
+          otherDynamicSprite instanceof SpriteTurtle) &&
         otherDynamicSprite.isActive
       ) {
         if (isCollectBTop(dynamicSprite, otherDynamicSprite)) {
@@ -292,7 +294,8 @@ export class PhysicsEngine {
       dynamicSprite instanceof SpriteBullet &&
       (otherDynamicSprite instanceof SpriteBadMushroom ||
         otherDynamicSprite instanceof SpriteHorror ||
-        otherDynamicSprite instanceof SpriteTurtle) &&
+        otherDynamicSprite instanceof SpriteTurtle ||
+        otherDynamicSprite instanceof SpriteShell) &&
       otherDynamicSprite.isActive
     ) {
       dynamicSprite.destroy();
@@ -316,7 +319,8 @@ export class PhysicsEngine {
       dynamicSprite.isAttacking() &&
       (otherDynamicSprite instanceof SpriteHorror ||
         otherDynamicSprite instanceof SpriteBadMushroom ||
-        otherDynamicSprite instanceof SpriteTurtle) &&
+        otherDynamicSprite instanceof SpriteTurtle ||
+        otherDynamicSprite instanceof SpriteShell) &&
       otherDynamicSprite.isActive
     ) {
       otherDynamicSprite.dieByBullet();
@@ -390,7 +394,8 @@ export class PhysicsEngine {
       dynamicSprite instanceof SpriteGrowMushroom ||
       dynamicSprite instanceof SpriteBadMushroom ||
       dynamicSprite instanceof SpriteHorror ||
-      dynamicSprite instanceof SpriteTurtle
+      dynamicSprite instanceof SpriteTurtle ||
+      dynamicSprite instanceof SpriteShell
     ) {
       dynamicSprite.vx = -dynamicSprite.vx;
     } else if (dynamicSprite instanceof SpriteBullet) {
@@ -409,7 +414,8 @@ export class PhysicsEngine {
       dynamicSprite instanceof SpriteGrowMushroom ||
       dynamicSprite instanceof SpriteBadMushroom ||
       dynamicSprite instanceof SpriteHorror ||
-      dynamicSprite instanceof SpriteTurtle
+      dynamicSprite instanceof SpriteTurtle ||
+      dynamicSprite instanceof SpriteShell
     ) {
       dynamicSprite.vx = -dynamicSprite.vx;
     } else if (dynamicSprite instanceof SpriteBullet) {

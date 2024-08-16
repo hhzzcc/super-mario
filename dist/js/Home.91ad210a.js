@@ -1,7 +1,7 @@
 "use strict";
 (self["webpackChunksuper_mario"] = self["webpackChunksuper_mario"] || []).push([[274],{
 
-/***/ 17:
+/***/ 491:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 // ESM COMPAT FLAG
@@ -79,6 +79,9 @@ function loadSpriteHorrorResources() {
 function loadSpriteTurtleResources() {
   return loadImages(["imgs/bad/turtle/frame-1.jpg", "imgs/bad/turtle/frame-2.jpg", "imgs/bad/turtle/hide-frame-1.jpg", "imgs/bad/turtle/hide-frame-2.jpg", "imgs/bad/turtle/die-frame-1.jpg", "imgs/bad/turtle/die-frame-2.jpg", "imgs/bad/turtle/fly-frame-1.jpg", "imgs/bad/turtle/fly-frame-2.jpg"]);
 }
+function loadSpriteShellResources() {
+  return loadImages(["imgs/bad/shell/frame-1.jpg", "imgs/bad/shell/frame-2.jpg", "imgs/bad/shell/hide.jpg"]);
+}
 function loadSpriteBulletResources() {
   return loadImages(["imgs/bullet/frame-1.jpg", "imgs/bullet/frame-2.jpg", "imgs/bullet/frame-3.jpg", "imgs/bullet/frame-4.jpg"]);
 }
@@ -98,9 +101,10 @@ let spriteGrowMushroomResources;
 let spriteBadMushroomResources;
 let spriteHorrorResources;
 let spriteTurtleResources;
+let spriteShellResources;
 let spriteWinResources;
 async function loadAllResources() {
-  [backgroundResources, baseMarioResources, bigMarioResources, bulletMarioResources, spriteBulletResources, spriteLandResources, spriteRockResources, spriteStoneResources, spriteStoneBornResources, SpriteAskResources, spriteFlowerResources, spriteGoldResources, spriteGrowMushroomResources, spriteBadMushroomResources, spriteHorrorResources, spriteTurtleResources, spriteWinResources] = await Promise.all([loadBackgroundResources(), loadBaseMarioResources(), loadBigMarioResources(), loadBulletMarioResources(), loadSpriteBulletResources(), loadSpriteLandResources(), loadSpriteRockResources(), loadSpriteStoneResources(), loadSpriteStoneBornResources(), loadSpriteAskResources(), loadSpriteFlowerResources(), loadSpriteGoldResources(), loadSpriteGrowMushroomResources(), loadSpriteBadMushroomResources(), loadSpriteHorrorResources(), loadSpriteTurtleResources(), loadSpriteWinResources()]);
+  [backgroundResources, baseMarioResources, bigMarioResources, bulletMarioResources, spriteBulletResources, spriteLandResources, spriteRockResources, spriteStoneResources, spriteStoneBornResources, SpriteAskResources, spriteFlowerResources, spriteGoldResources, spriteGrowMushroomResources, spriteBadMushroomResources, spriteHorrorResources, spriteTurtleResources, spriteShellResources, spriteWinResources] = await Promise.all([loadBackgroundResources(), loadBaseMarioResources(), loadBigMarioResources(), loadBulletMarioResources(), loadSpriteBulletResources(), loadSpriteLandResources(), loadSpriteRockResources(), loadSpriteStoneResources(), loadSpriteStoneBornResources(), loadSpriteAskResources(), loadSpriteFlowerResources(), loadSpriteGoldResources(), loadSpriteGrowMushroomResources(), loadSpriteBadMushroomResources(), loadSpriteHorrorResources(), loadSpriteTurtleResources(), loadSpriteShellResources(), loadSpriteWinResources()]);
 }
 ;// CONCATENATED MODULE: ./node_modules/.pnpm/@leafer+core@1.0.0/node_modules/@leafer/core/lib/core.esm.js
 const Platform = {
@@ -14045,7 +14049,89 @@ class SpriteTurtle extends DynamicSprite {
     context.drawImage(resource, this.x - camera.x, this.y, this.width, this.height);
   }
 }
+;// CONCATENATED MODULE: ./src/super-mario/sprite/sprite-shell.js
+
+
+
+class SpriteShell extends DynamicSprite {
+  constructor({
+    x,
+    y
+  }) {
+    super({
+      x,
+      y,
+      width: SIZE,
+      height: SIZE
+    });
+    this.frame = 0;
+    this.collectY = null;
+    this.collectStep = 0;
+    this.vx = -this.width / SIZE;
+    this.vy = 0;
+    this.resources = {
+      default: [spriteShellResources[0], spriteShellResources[1]],
+      hide: [spriteShellResources[2]],
+      dieByBullet: [spriteShellResources[0], spriteShellResources[1]]
+    };
+    this.type = "default";
+    this.active();
+  }
+  isAttacking() {
+    return this.vx !== 0 & this.type === "hide";
+  }
+  trampleLeft() {
+    this.frame = 0;
+    if (this.type !== "hide") {
+      this.type = "hide";
+      this.vx = 0;
+    } else {
+      this.vx = this.vx === 0 ? 10 : 0;
+    }
+  }
+  trampleRight() {
+    this.frame = 0;
+    if (this.type !== "hide") {
+      this.type = "hide";
+      this.vx = 0;
+    } else {
+      this.vx = this.vx === 0 ? -10 : 0;
+    }
+  }
+  dieByBullet() {
+    this.unActive();
+    this.type = "dieByBullet";
+    this.vx = 0;
+    this.vy = 0;
+    this.frame = 0;
+    const animate = () => {
+      if (this.beginX === undefined) {
+        this.beginX = this.x;
+        this.beginY = this.y;
+        this.animatedX = 0;
+      }
+      this.animatedX += 1;
+      this.animatedY = 0.2 * this.animatedX * this.animatedX - 5 * this.animatedX;
+      this.x = this.beginX + this.animatedX;
+      this.y = this.beginY + this.animatedY;
+      if (this.y > this.beginY + 300) {
+        this.destroy();
+        return;
+      }
+      requestAnimationFrame(animate);
+    };
+    animate();
+  }
+  draw(context, camera) {
+    const resource = this.resources[this.type][~~this.frame];
+    this.frame = ~~(this.frame + 0.03) > this.resources[this.type].length - 1 ? 0 : this.frame + 0.03;
+    this.x += this.vx;
+    this.y += this.vy;
+    context.drawImage(resource, this.x - camera.x, this.y, this.width, this.height);
+  }
+}
 ;// CONCATENATED MODULE: ./src/super-mario/map/index.js
+
 
 
 
@@ -14157,6 +14243,12 @@ class map_Map {
           break;
         case "sprite-turtle":
           dynamics.push(new SpriteTurtle({
+            x: v.x,
+            y: v.y
+          }));
+          break;
+        case "sprite-shell":
+          dynamics.push(new SpriteShell({
             x: v.x,
             y: v.y
           }));
@@ -15357,6 +15449,7 @@ class SpriteStoneBorn extends StaticSprite {
 
 
 
+
 const handleMarioAttack = lodash_es_throttle((scene, mario) => {
   const bullet = mario.attack();
   if (bullet) {
@@ -15539,7 +15632,7 @@ class PhysicsEngine {
         }
       }
       // 敌人乌龟
-      else if (otherDynamicSprite instanceof SpriteTurtle && otherDynamicSprite.isActive) {
+      else if ((otherDynamicSprite instanceof SpriteShell || otherDynamicSprite instanceof SpriteTurtle) && otherDynamicSprite.isActive) {
         if (isCollectBTop(dynamicSprite, otherDynamicSprite)) {
           this.jumping.remove(dynamicSprite);
           this.jumping.add(dynamicSprite, 4);
@@ -15558,7 +15651,7 @@ class PhysicsEngine {
     }
 
     // 子弹击中敌人
-    else if (dynamicSprite instanceof SpriteBullet && (otherDynamicSprite instanceof SpriteBadMushroom || otherDynamicSprite instanceof SpriteHorror || otherDynamicSprite instanceof SpriteTurtle) && otherDynamicSprite.isActive) {
+    else if (dynamicSprite instanceof SpriteBullet && (otherDynamicSprite instanceof SpriteBadMushroom || otherDynamicSprite instanceof SpriteHorror || otherDynamicSprite instanceof SpriteTurtle || otherDynamicSprite instanceof SpriteShell) && otherDynamicSprite.isActive) {
       dynamicSprite.destroy();
       if (otherDynamicSprite instanceof SpriteBadMushroom || otherDynamicSprite instanceof SpriteTurtle) {
         otherDynamicSprite.dieByBullet();
@@ -15567,7 +15660,7 @@ class PhysicsEngine {
     }
 
     // 龟壳击中敌人
-    else if (dynamicSprite instanceof SpriteTurtle && dynamicSprite.isAttacking() && (otherDynamicSprite instanceof SpriteHorror || otherDynamicSprite instanceof SpriteBadMushroom || otherDynamicSprite instanceof SpriteTurtle) && otherDynamicSprite.isActive) {
+    else if (dynamicSprite instanceof SpriteTurtle && dynamicSprite.isAttacking() && (otherDynamicSprite instanceof SpriteHorror || otherDynamicSprite instanceof SpriteBadMushroom || otherDynamicSprite instanceof SpriteTurtle || otherDynamicSprite instanceof SpriteShell) && otherDynamicSprite.isActive) {
       otherDynamicSprite.dieByBullet();
       this.onScore(otherDynamicSprite.x, otherDynamicSprite.y, otherDynamicSprite);
     }
@@ -15622,7 +15715,7 @@ class PhysicsEngine {
     dynamicSprite.x = staticSprite.x - dynamicSprite.width;
 
     // 蘑菇碰撞后，朝相反方向行动
-    if (dynamicSprite instanceof SpriteGrowMushroom || dynamicSprite instanceof SpriteBadMushroom || dynamicSprite instanceof SpriteHorror || dynamicSprite instanceof SpriteTurtle) {
+    if (dynamicSprite instanceof SpriteGrowMushroom || dynamicSprite instanceof SpriteBadMushroom || dynamicSprite instanceof SpriteHorror || dynamicSprite instanceof SpriteTurtle || dynamicSprite instanceof SpriteShell) {
       dynamicSprite.vx = -dynamicSprite.vx;
     } else if (dynamicSprite instanceof SpriteBullet) {
       dynamicSprite.vx = -dynamicSprite.vx;
@@ -15636,7 +15729,7 @@ class PhysicsEngine {
     dynamicSprite.x = staticSprite.x + staticSprite.width;
 
     // 蘑菇碰撞后，朝相反方向行动
-    if (dynamicSprite instanceof SpriteGrowMushroom || dynamicSprite instanceof SpriteBadMushroom || dynamicSprite instanceof SpriteHorror || dynamicSprite instanceof SpriteTurtle) {
+    if (dynamicSprite instanceof SpriteGrowMushroom || dynamicSprite instanceof SpriteBadMushroom || dynamicSprite instanceof SpriteHorror || dynamicSprite instanceof SpriteTurtle || dynamicSprite instanceof SpriteShell) {
       dynamicSprite.vx = -dynamicSprite.vx;
     } else if (dynamicSprite instanceof SpriteBullet) {
       dynamicSprite.vx = -dynamicSprite.vx;
@@ -24976,6 +25069,7 @@ const _hoisted_6 = ["src"];
 
 
 
+
 /* harmony default export */ var add_spritevue_type_script_setup_true_lang_js = ({
   emits: ["check", "mul-check", "finish"],
   setup(__props, {
@@ -25059,6 +25153,16 @@ const _hoisted_6 = ["src"];
         sprite.vx = 0;
         scene.addDynamicSprites(sprite);
       }
+    }, {
+      imgs: ["imgs/bad/shell/frame-1.jpg"],
+      handler(scene, x, y) {
+        const sprite = new SpriteShell({
+          x,
+          y
+        });
+        sprite.vx = 0;
+        scene.addDynamicSprites(sprite);
+      }
     }];
     (0,runtime_core_esm_bundler/* onMounted */.sV)(() => {
       emits("check", list[0]);
@@ -25107,10 +25211,10 @@ const _hoisted_6 = ["src"];
 });
 ;// CONCATENATED MODULE: ./src/components/add-sprite.vue?vue&type=script&setup=true&lang=js
  
-;// CONCATENATED MODULE: ./node_modules/.pnpm/mini-css-extract-plugin@2.9.0_webpack@5.92.1/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-31.use[0]!./node_modules/.pnpm/css-loader@6.11.0_webpack@5.92.1/node_modules/css-loader/dist/cjs.js??clonedRuleSet-31.use[1]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/.pnpm/postcss-loader@6.2.1_postcss@8.4.39_webpack@5.92.1/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-31.use[2]!./node_modules/.pnpm/less-loader@8.0.0_less@4.0.0_webpack@5.92.1/node_modules/less-loader/dist/cjs.js??clonedRuleSet-31.use[3]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./src/components/add-sprite.vue?vue&type=style&index=0&id=fee95f46&lang=less&module=true
+;// CONCATENATED MODULE: ./node_modules/.pnpm/mini-css-extract-plugin@2.9.0_webpack@5.92.1/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-31.use[0]!./node_modules/.pnpm/css-loader@6.11.0_webpack@5.92.1/node_modules/css-loader/dist/cjs.js??clonedRuleSet-31.use[1]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/.pnpm/postcss-loader@6.2.1_postcss@8.4.39_webpack@5.92.1/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-31.use[2]!./node_modules/.pnpm/less-loader@8.0.0_less@4.0.0_webpack@5.92.1/node_modules/less-loader/dist/cjs.js??clonedRuleSet-31.use[3]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./src/components/add-sprite.vue?vue&type=style&index=0&id=45a0e7bb&lang=less&module=true
 // extracted by mini-css-extract-plugin
-/* harmony default export */ var add_spritevue_type_style_index_0_id_fee95f46_lang_less_module_true = ({"Title":"add-sprite_Title_h1r1X","List":"add-sprite_List_l9Lg2","Item":"add-sprite_Item_nQEMD","Text":"add-sprite_Text_M4h8W"});
-;// CONCATENATED MODULE: ./src/components/add-sprite.vue?vue&type=style&index=0&id=fee95f46&lang=less&module=true
+/* harmony default export */ var add_spritevue_type_style_index_0_id_45a0e7bb_lang_less_module_true = ({"Title":"add-sprite_Title_h1r1X","List":"add-sprite_List_l9Lg2","Item":"add-sprite_Item_nQEMD","Text":"add-sprite_Text_M4h8W"});
+;// CONCATENATED MODULE: ./src/components/add-sprite.vue?vue&type=style&index=0&id=45a0e7bb&lang=less&module=true
  
 // EXTERNAL MODULE: ./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/exportHelper.js
 var exportHelper = __webpack_require__(727);
@@ -25120,7 +25224,7 @@ var exportHelper = __webpack_require__(727);
 
 const cssModules = {}
 ;
-cssModules["$style"] = add_spritevue_type_style_index_0_id_fee95f46_lang_less_module_true
+cssModules["$style"] = add_spritevue_type_style_index_0_id_45a0e7bb_lang_less_module_true
 
 ;
 const __exports__ = /*#__PURE__*/(0,exportHelper/* default */.A)(add_spritevue_type_script_setup_true_lang_js, [['__cssModules',cssModules]])
@@ -34923,4 +35027,4 @@ const Home_exports_ = /*#__PURE__*/(0,exportHelper/* default */.A)(Homevue_type_
 /***/ })
 
 }]);
-//# sourceMappingURL=Home.2ab3ebc5.js.map
+//# sourceMappingURL=Home.91ad210a.js.map
