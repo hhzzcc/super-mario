@@ -14349,7 +14349,7 @@ class Mario extends DynamicSprite {
     super({
       x,
       y,
-      width: SIZE,
+      width: SIZE - 4,
       height: SIZE
     });
     this.isAttack = false;
@@ -33643,4 +33643,4 @@ const Home_exports_ = /*#__PURE__*/(0,exportHelper/* default */.A)(Homevue_type_
 /***/ })
 
 }]);
-//# sourceMappingURL=Home.05946e38.js.map
+//# sourceMappingURL=Home.7e23bd3c.js.map

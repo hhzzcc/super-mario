@@ -49,7 +49,7 @@ export class Mario extends DynamicSprite {
     super({
       x,
       y,
-      width: SIZE,
+      width: SIZE - 4,
       height: SIZE,
     });
     this.isAttack = false;
