@@ -8,6 +8,8 @@
 
 [体验地址](https://hhzzcc.github.io/super-mario/dist/index.html#/)
 
+[文章地址](https://juejin.cn/post/7392116075674828827)
+
 ## 项目介绍
 
 由 leaferjs + vue 编写，支持自定义编辑地图
