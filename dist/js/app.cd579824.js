@@ -65,7 +65,7 @@ var vue_router_esm_bundler = __webpack_require__(641);
 const routes = [{
   path: "/",
   name: "Home",
-  component: () => __webpack_require__.e(/* import() | Home */ 274).then(__webpack_require__.bind(__webpack_require__, 606))
+  component: () => __webpack_require__.e(/* import() | Home */ 274).then(__webpack_require__.bind(__webpack_require__, 17))
 }];
 const router = (0,vue_router_esm_bundler/* createRouter */.aE)({
   history: (0,vue_router_esm_bundler/* createWebHashHistory */.Bt)(),
@@ -177,7 +177,7 @@ var dist_reset = __webpack_require__(725);
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = function(chunkId) {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + "Home" + "." + "7e23bd3c" + ".js";
+/******/ 			return "js/" + "Home" + "." + "2ab3ebc5" + ".js";
 /******/ 		};
 /******/ 	}();
 /******/ 	
@@ -457,4 +457,4 @@ var dist_reset = __webpack_require__(725);
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=app.bf9089a7.js.map
+//# sourceMappingURL=app.cd579824.js.map

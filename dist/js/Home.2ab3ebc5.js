@@ -1,7 +1,7 @@
 "use strict";
 (self["webpackChunksuper_mario"] = self["webpackChunksuper_mario"] || []).push([[274],{
 
-/***/ 606:
+/***/ 17:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 // ESM COMPAT FLAG
@@ -73,6 +73,12 @@ function loadSpriteGrowMushroomResources() {
 function loadSpriteBadMushroomResources() {
   return loadImages(["imgs/bad/mushroom/frame-1.jpg", "imgs/bad/mushroom/frame-2.jpg", "imgs/bad/mushroom/die-frame-1.jpg", "imgs/bad/mushroom/die-frame-2.jpg", "imgs/bad/mushroom/die.jpg"]);
 }
+function loadSpriteHorrorResources() {
+  return loadImages(["imgs/bad/horror/frame-1.jpg", "imgs/bad/horror/frame-2.jpg", "imgs/bad/horror/die-frame-1.jpg", "imgs/bad/horror/die-frame-2.jpg"]);
+}
+function loadSpriteTurtleResources() {
+  return loadImages(["imgs/bad/turtle/frame-1.jpg", "imgs/bad/turtle/frame-2.jpg", "imgs/bad/turtle/hide-frame-1.jpg", "imgs/bad/turtle/hide-frame-2.jpg", "imgs/bad/turtle/die-frame-1.jpg", "imgs/bad/turtle/die-frame-2.jpg", "imgs/bad/turtle/fly-frame-1.jpg", "imgs/bad/turtle/fly-frame-2.jpg"]);
+}
 function loadSpriteBulletResources() {
   return loadImages(["imgs/bullet/frame-1.jpg", "imgs/bullet/frame-2.jpg", "imgs/bullet/frame-3.jpg", "imgs/bullet/frame-4.jpg"]);
 }
@@ -90,9 +96,11 @@ let spriteFlowerResources;
 let spriteGoldResources;
 let spriteGrowMushroomResources;
 let spriteBadMushroomResources;
+let spriteHorrorResources;
+let spriteTurtleResources;
 let spriteWinResources;
 async function loadAllResources() {
-  [backgroundResources, baseMarioResources, bigMarioResources, bulletMarioResources, spriteBulletResources, spriteLandResources, spriteRockResources, spriteStoneResources, spriteStoneBornResources, SpriteAskResources, spriteFlowerResources, spriteGoldResources, spriteGrowMushroomResources, spriteBadMushroomResources, spriteWinResources] = await Promise.all([loadBackgroundResources(), loadBaseMarioResources(), loadBigMarioResources(), loadBulletMarioResources(), loadSpriteBulletResources(), loadSpriteLandResources(), loadSpriteRockResources(), loadSpriteStoneResources(), loadSpriteStoneBornResources(), loadSpriteAskResources(), loadSpriteFlowerResources(), loadSpriteGoldResources(), loadSpriteGrowMushroomResources(), loadSpriteBadMushroomResources(), loadSpriteWinResources()]);
+  [backgroundResources, baseMarioResources, bigMarioResources, bulletMarioResources, spriteBulletResources, spriteLandResources, spriteRockResources, spriteStoneResources, spriteStoneBornResources, SpriteAskResources, spriteFlowerResources, spriteGoldResources, spriteGrowMushroomResources, spriteBadMushroomResources, spriteHorrorResources, spriteTurtleResources, spriteWinResources] = await Promise.all([loadBackgroundResources(), loadBaseMarioResources(), loadBigMarioResources(), loadBulletMarioResources(), loadSpriteBulletResources(), loadSpriteLandResources(), loadSpriteRockResources(), loadSpriteStoneResources(), loadSpriteStoneBornResources(), loadSpriteAskResources(), loadSpriteFlowerResources(), loadSpriteGoldResources(), loadSpriteGrowMushroomResources(), loadSpriteBadMushroomResources(), loadSpriteHorrorResources(), loadSpriteTurtleResources(), loadSpriteWinResources()]);
 }
 ;// CONCATENATED MODULE: ./node_modules/.pnpm/@leafer+core@1.0.0/node_modules/@leafer/core/lib/core.esm.js
 const Platform = {
@@ -13897,7 +13905,149 @@ class SpriteRock extends StaticSprite {
     context.drawImage(spriteRockResources[0], this.x - camera.x, this.y, this.width, this.height);
   }
 }
+;// CONCATENATED MODULE: ./src/super-mario/sprite/sprite-horror.js
+
+
+
+class SpriteHorror extends DynamicSprite {
+  constructor({
+    x,
+    y
+  }) {
+    super({
+      x,
+      y,
+      width: SIZE,
+      height: SIZE
+    });
+    this.frame = 0;
+    this.collectY = null;
+    this.collectStep = 0;
+    this.vx = -this.width / SIZE;
+    this.vy = 0;
+    this.resources = {
+      default: [spriteHorrorResources[0], spriteHorrorResources[1]],
+      dieByBullet: [spriteHorrorResources[2], spriteHorrorResources[3]]
+    };
+    this.type = "default";
+    this.active();
+  }
+  dieByBullet() {
+    this.unActive();
+    this.type = "dieByBullet";
+    this.vx = 0;
+    this.vy = 0;
+    this.frame = 0;
+    const animate = () => {
+      if (this.beginX === undefined) {
+        this.beginX = this.x;
+        this.beginY = this.y;
+        this.animatedX = 0;
+      }
+      this.animatedX += 1;
+      this.animatedY = 0.2 * this.animatedX * this.animatedX - 5 * this.animatedX;
+      this.x = this.beginX + this.animatedX;
+      this.y = this.beginY + this.animatedY;
+      if (this.y > this.beginY + 300) {
+        this.destroy();
+        return;
+      }
+      requestAnimationFrame(animate);
+    };
+    animate();
+  }
+  draw(context, camera) {
+    const resource = this.resources[this.type][~~this.frame];
+    this.frame = ~~(this.frame + 0.03) > this.resources[this.type].length - 1 ? 0 : this.frame + 0.03;
+    this.x += this.vx;
+    this.y += this.vy;
+    context.drawImage(resource, this.x - camera.x, this.y, this.width, this.height);
+  }
+}
+;// CONCATENATED MODULE: ./src/super-mario/sprite/sprite-turtle.js
+
+
+
+class SpriteTurtle extends DynamicSprite {
+  constructor({
+    x,
+    y
+  }) {
+    super({
+      x,
+      y,
+      width: SIZE,
+      height: SIZE
+    });
+    this.frame = 0;
+    this.collectY = null;
+    this.collectStep = 0;
+    this.vx = -this.width / SIZE;
+    this.vy = 0;
+    this.resources = {
+      default: [spriteTurtleResources[0], spriteTurtleResources[1]],
+      hide: [spriteTurtleResources[2]],
+      dieByBullet: [spriteTurtleResources[4], spriteTurtleResources[5]]
+    };
+    this.type = "default";
+    this.active();
+  }
+  isAttacking() {
+    return this.vx !== 0 & this.type === "hide";
+  }
+  trampleLeft() {
+    this.frame = 0;
+    if (this.type !== "hide") {
+      this.type = "hide";
+      this.vx = 0;
+    } else {
+      this.vx = this.vx === 0 ? 5 : 0;
+    }
+  }
+  trampleRight() {
+    this.frame = 0;
+    if (this.type !== "hide") {
+      this.type = "hide";
+      this.vx = 0;
+    } else {
+      this.vx = this.vx === 0 ? -5 : 0;
+    }
+  }
+  dieByBullet() {
+    this.unActive();
+    this.type = "dieByBullet";
+    this.vx = 0;
+    this.vy = 0;
+    this.frame = 0;
+    const animate = () => {
+      if (this.beginX === undefined) {
+        this.beginX = this.x;
+        this.beginY = this.y;
+        this.animatedX = 0;
+      }
+      this.animatedX += 1;
+      this.animatedY = 0.2 * this.animatedX * this.animatedX - 5 * this.animatedX;
+      this.x = this.beginX + this.animatedX;
+      this.y = this.beginY + this.animatedY;
+      if (this.y > this.beginY + 300) {
+        this.destroy();
+        return;
+      }
+      requestAnimationFrame(animate);
+    };
+    animate();
+  }
+  draw(context, camera) {
+    const resource = this.resources[this.type][~~this.frame];
+    this.frame = ~~(this.frame + 0.03) > this.resources[this.type].length - 1 ? 0 : this.frame + 0.03;
+    this.x += this.vx;
+    this.y += this.vy;
+    context.drawImage(resource, this.x - camera.x, this.y, this.width, this.height);
+  }
+}
 ;// CONCATENATED MODULE: ./src/super-mario/map/index.js
+
+
 
 
 
@@ -13999,6 +14149,18 @@ class map_Map {
             y: v.y
           }));
           break;
+        case "sprite-horror":
+          dynamics.push(new SpriteHorror({
+            x: v.x,
+            y: v.y
+          }));
+          break;
+        case "sprite-turtle":
+          dynamics.push(new SpriteTurtle({
+            x: v.x,
+            y: v.y
+          }));
+          break;
       }
     });
     return {
@@ -14095,6 +14257,7 @@ class Background {
 
 
 
+
 class Score {
   constructor(options) {
     _defineProperty(this, "children", []);
@@ -14133,7 +14296,7 @@ class Score {
       score = 400;
     } else if (sprite instanceof SpriteGrowMushroom || sprite instanceof SpriteFlower) {
       score = 2000;
-    } else if (sprite instanceof SpriteStone) {
+    } else {
       score = 200;
     }
     const text = new draw_esm_Text({
@@ -15104,6 +15267,7 @@ class Jumping {
       }
       return;
     }
+    sprite.vy = 0;
     const item = {
       // 初速度
       v0,
@@ -15176,6 +15340,8 @@ class SpriteStoneBorn extends StaticSprite {
   }
 }
 ;// CONCATENATED MODULE: ./src/super-mario/physics-engine/index.js
+
+
 
 
 
@@ -15360,7 +15526,9 @@ class PhysicsEngine {
       // 成长花、成长蘑菇
       if (otherDynamicSprite instanceof SpriteFlower || otherDynamicSprite instanceof SpriteGrowMushroom) {
         this.handleGetProps(dynamicSprite, otherDynamicSprite);
-      } else if (otherDynamicSprite instanceof SpriteBadMushroom && otherDynamicSprite.isActive) {
+      }
+      // 敌人蘑菇
+      else if (otherDynamicSprite instanceof SpriteBadMushroom && otherDynamicSprite.isActive) {
         if (isCollectBTop(dynamicSprite, otherDynamicSprite)) {
           this.jumping.remove(dynamicSprite);
           this.jumping.add(dynamicSprite, 4);
@@ -15370,11 +15538,36 @@ class PhysicsEngine {
           dynamicSprite.die();
         }
       }
+      // 敌人乌龟
+      else if (otherDynamicSprite instanceof SpriteTurtle && otherDynamicSprite.isActive) {
+        if (isCollectBTop(dynamicSprite, otherDynamicSprite)) {
+          this.jumping.remove(dynamicSprite);
+          this.jumping.add(dynamicSprite, 4);
+          if (dynamicSprite.x <= otherDynamicSprite.x + otherDynamicSprite.width / 2) {
+            otherDynamicSprite.trampleLeft();
+          } else {
+            otherDynamicSprite.trampleRight();
+          }
+          this.onScore(otherDynamicSprite.x, otherDynamicSprite.y, otherDynamicSprite);
+        } else {
+          dynamicSprite.die();
+        }
+      } else if (otherDynamicSprite instanceof SpriteHorror && otherDynamicSprite.isActive) {
+        dynamicSprite.die();
+      }
     }
 
     // 子弹击中敌人
-    if (dynamicSprite instanceof SpriteBullet && otherDynamicSprite instanceof SpriteBadMushroom && otherDynamicSprite.isActive) {
+    else if (dynamicSprite instanceof SpriteBullet && (otherDynamicSprite instanceof SpriteBadMushroom || otherDynamicSprite instanceof SpriteHorror || otherDynamicSprite instanceof SpriteTurtle) && otherDynamicSprite.isActive) {
       dynamicSprite.destroy();
+      if (otherDynamicSprite instanceof SpriteBadMushroom || otherDynamicSprite instanceof SpriteTurtle) {
+        otherDynamicSprite.dieByBullet();
+        this.onScore(otherDynamicSprite.x, otherDynamicSprite.y, otherDynamicSprite);
+      }
+    }
+
+    // 龟壳击中敌人
+    else if (dynamicSprite instanceof SpriteTurtle && dynamicSprite.isAttacking() && (otherDynamicSprite instanceof SpriteHorror || otherDynamicSprite instanceof SpriteBadMushroom || otherDynamicSprite instanceof SpriteTurtle) && otherDynamicSprite.isActive) {
       otherDynamicSprite.dieByBullet();
       this.onScore(otherDynamicSprite.x, otherDynamicSprite.y, otherDynamicSprite);
     }
@@ -15429,7 +15622,7 @@ class PhysicsEngine {
     dynamicSprite.x = staticSprite.x - dynamicSprite.width;
 
     // 蘑菇碰撞后，朝相反方向行动
-    if (dynamicSprite instanceof SpriteGrowMushroom || dynamicSprite instanceof SpriteBadMushroom) {
+    if (dynamicSprite instanceof SpriteGrowMushroom || dynamicSprite instanceof SpriteBadMushroom || dynamicSprite instanceof SpriteHorror || dynamicSprite instanceof SpriteTurtle) {
       dynamicSprite.vx = -dynamicSprite.vx;
     } else if (dynamicSprite instanceof SpriteBullet) {
       dynamicSprite.vx = -dynamicSprite.vx;
@@ -15443,7 +15636,7 @@ class PhysicsEngine {
     dynamicSprite.x = staticSprite.x + staticSprite.width;
 
     // 蘑菇碰撞后，朝相反方向行动
-    if (dynamicSprite instanceof SpriteGrowMushroom || dynamicSprite instanceof SpriteBadMushroom) {
+    if (dynamicSprite instanceof SpriteGrowMushroom || dynamicSprite instanceof SpriteBadMushroom || dynamicSprite instanceof SpriteHorror || dynamicSprite instanceof SpriteTurtle) {
       dynamicSprite.vx = -dynamicSprite.vx;
     } else if (dynamicSprite instanceof SpriteBullet) {
       dynamicSprite.vx = -dynamicSprite.vx;
@@ -24781,6 +24974,8 @@ const _hoisted_6 = ["src"];
 
 
 
+
+
 /* harmony default export */ var add_spritevue_type_script_setup_true_lang_js = ({
   emits: ["check", "mul-check", "finish"],
   setup(__props, {
@@ -24844,6 +25039,26 @@ const _hoisted_6 = ["src"];
         sprite.vx = 0;
         scene.addDynamicSprites(sprite);
       }
+    }, {
+      imgs: ["imgs/bad/horror/frame-1.jpg"],
+      handler(scene, x, y) {
+        const sprite = new SpriteHorror({
+          x,
+          y
+        });
+        sprite.vx = 0;
+        scene.addDynamicSprites(sprite);
+      }
+    }, {
+      imgs: ["imgs/bad/turtle/frame-1.jpg"],
+      handler(scene, x, y) {
+        const sprite = new SpriteTurtle({
+          x,
+          y
+        });
+        sprite.vx = 0;
+        scene.addDynamicSprites(sprite);
+      }
     }];
     (0,runtime_core_esm_bundler/* onMounted */.sV)(() => {
       emits("check", list[0]);
@@ -24892,10 +25107,10 @@ const _hoisted_6 = ["src"];
 });
 ;// CONCATENATED MODULE: ./src/components/add-sprite.vue?vue&type=script&setup=true&lang=js
  
-;// CONCATENATED MODULE: ./node_modules/.pnpm/mini-css-extract-plugin@2.9.0_webpack@5.92.1/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-31.use[0]!./node_modules/.pnpm/css-loader@6.11.0_webpack@5.92.1/node_modules/css-loader/dist/cjs.js??clonedRuleSet-31.use[1]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/.pnpm/postcss-loader@6.2.1_postcss@8.4.39_webpack@5.92.1/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-31.use[2]!./node_modules/.pnpm/less-loader@8.0.0_less@4.0.0_webpack@5.92.1/node_modules/less-loader/dist/cjs.js??clonedRuleSet-31.use[3]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./src/components/add-sprite.vue?vue&type=style&index=0&id=d82e8aae&lang=less&module=true
+;// CONCATENATED MODULE: ./node_modules/.pnpm/mini-css-extract-plugin@2.9.0_webpack@5.92.1/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-31.use[0]!./node_modules/.pnpm/css-loader@6.11.0_webpack@5.92.1/node_modules/css-loader/dist/cjs.js??clonedRuleSet-31.use[1]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/.pnpm/postcss-loader@6.2.1_postcss@8.4.39_webpack@5.92.1/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-31.use[2]!./node_modules/.pnpm/less-loader@8.0.0_less@4.0.0_webpack@5.92.1/node_modules/less-loader/dist/cjs.js??clonedRuleSet-31.use[3]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./src/components/add-sprite.vue?vue&type=style&index=0&id=fee95f46&lang=less&module=true
 // extracted by mini-css-extract-plugin
-/* harmony default export */ var add_spritevue_type_style_index_0_id_d82e8aae_lang_less_module_true = ({"Title":"add-sprite_Title_h1r1X","List":"add-sprite_List_l9Lg2","Item":"add-sprite_Item_nQEMD","Text":"add-sprite_Text_M4h8W"});
-;// CONCATENATED MODULE: ./src/components/add-sprite.vue?vue&type=style&index=0&id=d82e8aae&lang=less&module=true
+/* harmony default export */ var add_spritevue_type_style_index_0_id_fee95f46_lang_less_module_true = ({"Title":"add-sprite_Title_h1r1X","List":"add-sprite_List_l9Lg2","Item":"add-sprite_Item_nQEMD","Text":"add-sprite_Text_M4h8W"});
+;// CONCATENATED MODULE: ./src/components/add-sprite.vue?vue&type=style&index=0&id=fee95f46&lang=less&module=true
  
 // EXTERNAL MODULE: ./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/exportHelper.js
 var exportHelper = __webpack_require__(727);
@@ -24905,7 +25120,7 @@ var exportHelper = __webpack_require__(727);
 
 const cssModules = {}
 ;
-cssModules["$style"] = add_spritevue_type_style_index_0_id_d82e8aae_lang_less_module_true
+cssModules["$style"] = add_spritevue_type_style_index_0_id_fee95f46_lang_less_module_true
 
 ;
 const __exports__ = /*#__PURE__*/(0,exportHelper/* default */.A)(add_spritevue_type_script_setup_true_lang_js, [['__cssModules',cssModules]])
@@ -24986,6 +25201,7 @@ const mariovue_type_script_setup_true_lang_js_hoisted_3 = ["onClick", "onMouseen
     }
     function handleFinish() {
       const mapData = map.serialization(renderer.scene);
+      console.log(mapData);
       let maxX = 0;
       mapData.data.forEach(v => {
         maxX = Math.max(v.x, maxX);
@@ -25133,10 +25349,10 @@ const mariovue_type_script_setup_true_lang_js_hoisted_3 = ["onClick", "onMouseen
 });
 ;// CONCATENATED MODULE: ./src/components/mario.vue?vue&type=script&setup=true&lang=js
  
-;// CONCATENATED MODULE: ./node_modules/.pnpm/mini-css-extract-plugin@2.9.0_webpack@5.92.1/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-31.use[0]!./node_modules/.pnpm/css-loader@6.11.0_webpack@5.92.1/node_modules/css-loader/dist/cjs.js??clonedRuleSet-31.use[1]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/.pnpm/postcss-loader@6.2.1_postcss@8.4.39_webpack@5.92.1/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-31.use[2]!./node_modules/.pnpm/less-loader@8.0.0_less@4.0.0_webpack@5.92.1/node_modules/less-loader/dist/cjs.js??clonedRuleSet-31.use[3]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./src/components/mario.vue?vue&type=style&index=0&id=bd36f530&lang=less&module=true
+;// CONCATENATED MODULE: ./node_modules/.pnpm/mini-css-extract-plugin@2.9.0_webpack@5.92.1/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-31.use[0]!./node_modules/.pnpm/css-loader@6.11.0_webpack@5.92.1/node_modules/css-loader/dist/cjs.js??clonedRuleSet-31.use[1]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/.pnpm/postcss-loader@6.2.1_postcss@8.4.39_webpack@5.92.1/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-31.use[2]!./node_modules/.pnpm/less-loader@8.0.0_less@4.0.0_webpack@5.92.1/node_modules/less-loader/dist/cjs.js??clonedRuleSet-31.use[3]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./src/components/mario.vue?vue&type=style&index=0&id=4cb8fcbb&lang=less&module=true
 // extracted by mini-css-extract-plugin
-/* harmony default export */ var mariovue_type_style_index_0_id_bd36f530_lang_less_module_true = ({"Container":"mario_Container_TbvVA","MoveLeft":"mario_MoveLeft_OPvUy","MoveRight":"mario_MoveRight_qZQ8f","End":"mario_End_nUh95","GridEditor":"mario_GridEditor_Te7PO","EndTitle":"mario_EndTitle_gFNNq","Score":"mario_Score_xOzyJ"});
-;// CONCATENATED MODULE: ./src/components/mario.vue?vue&type=style&index=0&id=bd36f530&lang=less&module=true
+/* harmony default export */ var mariovue_type_style_index_0_id_4cb8fcbb_lang_less_module_true = ({"Container":"mario_Container_TbvVA","MoveLeft":"mario_MoveLeft_OPvUy","MoveRight":"mario_MoveRight_qZQ8f","End":"mario_End_nUh95","GridEditor":"mario_GridEditor_Te7PO","EndTitle":"mario_EndTitle_gFNNq","Score":"mario_Score_xOzyJ"});
+;// CONCATENATED MODULE: ./src/components/mario.vue?vue&type=style&index=0&id=4cb8fcbb&lang=less&module=true
  
 ;// CONCATENATED MODULE: ./src/components/mario.vue
 
@@ -25144,7 +25360,7 @@ const mariovue_type_script_setup_true_lang_js_hoisted_3 = ["onClick", "onMouseen
 
 const mario_cssModules = {}
 ;
-mario_cssModules["$style"] = mariovue_type_style_index_0_id_bd36f530_lang_less_module_true
+mario_cssModules["$style"] = mariovue_type_style_index_0_id_4cb8fcbb_lang_less_module_true
 
 ;
 const mario_exports_ = /*#__PURE__*/(0,exportHelper/* default */.A)(mariovue_type_script_setup_true_lang_js, [['__cssModules',mario_cssModules]])
@@ -25210,6 +25426,14 @@ const data = {
     type: "sprite-grow-mushroom",
     x: 288,
     y: 288
+  }, {
+    type: "sprite-turtle",
+    x: 450,
+    y: 340
+  }, {
+    type: "sprite-stone",
+    x: 480,
+    y: 384
   }, {
     type: "sprite-bad-mushroom",
     x: 800,
@@ -26278,6 +26502,1058 @@ const data = {
     type: "sprite-win",
     x: 3616,
     y: 32
+  }]
+};
+;// CONCATENATED MODULE: ./src/maps/map2.js
+const map2_data = {
+  data: [{
+    type: "sprite-turtle",
+    x: 192,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 320,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 320,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 352,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 352,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 384,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 384,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 416,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 416,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 448,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 448,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 480,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 480,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 512,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 512,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 544,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 544,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 576,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 576,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 608,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 608,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 672,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 672,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 704,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 704,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 736,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 736,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 768,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 768,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 800,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 800,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 832,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 832,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 864,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 864,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 896,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 896,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 928,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 928,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 960,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 960,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 992,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 992,
+    y: 256
+  }, {
+    type: "sprite-horror",
+    x: 1024,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 1024,
+    y: 256
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 672,
+    y: 320
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 672,
+    y: 352
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 704,
+    y: 320
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 704,
+    y: 352
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 736,
+    y: 320
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 736,
+    y: 352
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 768,
+    y: 320
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 768,
+    y: 352
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 800,
+    y: 320
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 800,
+    y: 352
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 832,
+    y: 320
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 832,
+    y: 352
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 864,
+    y: 320
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 864,
+    y: 352
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 896,
+    y: 320
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 896,
+    y: 352
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 928,
+    y: 320
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 928,
+    y: 352
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 960,
+    y: 320
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 960,
+    y: 352
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 992,
+    y: 320
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 992,
+    y: 352
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 1024,
+    y: 320
+  }, {
+    type: "sprite-grow-mushroom",
+    x: 1024,
+    y: 352
+  }, {
+    type: "sprite-horror",
+    x: 1088,
+    y: 192
+  }, {
+    type: "sprite-horror",
+    x: 1088,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 1120,
+    y: 192
+  }, {
+    type: "sprite-horror",
+    x: 1120,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 1152,
+    y: 192
+  }, {
+    type: "sprite-horror",
+    x: 1152,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 1184,
+    y: 192
+  }, {
+    type: "sprite-horror",
+    x: 1184,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 1216,
+    y: 192
+  }, {
+    type: "sprite-horror",
+    x: 1216,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 1248,
+    y: 192
+  }, {
+    type: "sprite-horror",
+    x: 1248,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 1280,
+    y: 192
+  }, {
+    type: "sprite-horror",
+    x: 1280,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 1312,
+    y: 192
+  }, {
+    type: "sprite-horror",
+    x: 1312,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 1344,
+    y: 192
+  }, {
+    type: "sprite-horror",
+    x: 1344,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 1376,
+    y: 192
+  }, {
+    type: "sprite-horror",
+    x: 1376,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 1408,
+    y: 192
+  }, {
+    type: "sprite-horror",
+    x: 1408,
+    y: 224
+  }, {
+    type: "sprite-horror",
+    x: 1440,
+    y: 192
+  }, {
+    type: "sprite-horror",
+    x: 1440,
+    y: 224
+  }, {
+    type: "sprite-turtle",
+    x: 1024,
+    y: 96
+  }, {
+    type: "sprite-turtle",
+    x: 1024,
+    y: 128
+  }, {
+    type: "sprite-turtle",
+    x: 1056,
+    y: 96
+  }, {
+    type: "sprite-turtle",
+    x: 1056,
+    y: 128
+  }, {
+    type: "sprite-turtle",
+    x: 1088,
+    y: 96
+  }, {
+    type: "sprite-turtle",
+    x: 1088,
+    y: 128
+  }, {
+    type: "sprite-turtle",
+    x: 1536,
+    y: 224
+  }, {
+    type: "sprite-turtle",
+    x: 1536,
+    y: 256
+  }, {
+    type: "sprite-turtle",
+    x: 1568,
+    y: 224
+  }, {
+    type: "sprite-turtle",
+    x: 1568,
+    y: 256
+  }, {
+    type: "sprite-turtle",
+    x: 1600,
+    y: 224
+  }, {
+    type: "sprite-turtle",
+    x: 1600,
+    y: 256
+  }, {
+    type: "sprite-turtle",
+    x: 1632,
+    y: 224
+  }, {
+    type: "sprite-turtle",
+    x: 1632,
+    y: 256
+  }, {
+    type: "sprite-turtle",
+    x: 1664,
+    y: 224
+  }, {
+    type: "sprite-turtle",
+    x: 1664,
+    y: 256
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1728,
+    y: 160
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1728,
+    y: 192
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1728,
+    y: 224
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1728,
+    y: 256
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1760,
+    y: 160
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1760,
+    y: 192
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1760,
+    y: 224
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1760,
+    y: 256
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1792,
+    y: 160
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1792,
+    y: 192
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1792,
+    y: 224
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1792,
+    y: 256
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1824,
+    y: 160
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1824,
+    y: 192
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1824,
+    y: 224
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1824,
+    y: 256
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1856,
+    y: 160
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1856,
+    y: 192
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1856,
+    y: 224
+  }, {
+    type: "sprite-bad-mushroom",
+    x: 1856,
+    y: 256
+  }, {
+    type: "sprite-rock",
+    x: 0,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 0,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 32,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 32,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 64,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 64,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 96,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 96,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 128,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 128,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 160,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 160,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 192,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 192,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 224,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 224,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 256,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 256,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 288,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 288,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 320,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 320,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 352,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 352,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 384,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 384,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 416,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 416,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 448,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 448,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 480,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 480,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 512,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 512,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 544,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 544,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 576,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 576,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 608,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 608,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 640,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 640,
+    y: 352
+  }, {
+    type: "sprite-ask",
+    x: 672,
+    y: 320
+  }, {
+    type: "sprite-ask",
+    x: 672,
+    y: 352
+  }, {
+    type: "sprite-ask",
+    x: 704,
+    y: 320
+  }, {
+    type: "sprite-ask",
+    x: 704,
+    y: 352
+  }, {
+    type: "sprite-ask",
+    x: 736,
+    y: 320
+  }, {
+    type: "sprite-ask",
+    x: 736,
+    y: 352
+  }, {
+    type: "sprite-ask",
+    x: 768,
+    y: 320
+  }, {
+    type: "sprite-ask",
+    x: 768,
+    y: 352
+  }, {
+    type: "sprite-ask",
+    x: 800,
+    y: 320
+  }, {
+    type: "sprite-ask",
+    x: 800,
+    y: 352
+  }, {
+    type: "sprite-ask",
+    x: 832,
+    y: 320
+  }, {
+    type: "sprite-ask",
+    x: 832,
+    y: 352
+  }, {
+    type: "sprite-ask",
+    x: 864,
+    y: 320
+  }, {
+    type: "sprite-ask",
+    x: 864,
+    y: 352
+  }, {
+    type: "sprite-ask",
+    x: 896,
+    y: 320
+  }, {
+    type: "sprite-ask",
+    x: 896,
+    y: 352
+  }, {
+    type: "sprite-ask",
+    x: 928,
+    y: 320
+  }, {
+    type: "sprite-ask",
+    x: 928,
+    y: 352
+  }, {
+    type: "sprite-ask",
+    x: 960,
+    y: 320
+  }, {
+    type: "sprite-ask",
+    x: 960,
+    y: 352
+  }, {
+    type: "sprite-ask",
+    x: 992,
+    y: 320
+  }, {
+    type: "sprite-ask",
+    x: 992,
+    y: 352
+  }, {
+    type: "sprite-ask",
+    x: 1024,
+    y: 320
+  }, {
+    type: "sprite-ask",
+    x: 1024,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1056,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1056,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1088,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1088,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1120,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1120,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1152,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1152,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1184,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1184,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1216,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1216,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1248,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1248,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1280,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1280,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1312,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1312,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1344,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1344,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1376,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1376,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1408,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1408,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1440,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1440,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1472,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1472,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1504,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1504,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1536,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1536,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1568,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1568,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1600,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1600,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1632,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1632,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1664,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1664,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1696,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1696,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1728,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1728,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1760,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1760,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1792,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1792,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1824,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1824,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1856,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1856,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1888,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1888,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1920,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1920,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1952,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1952,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 1984,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 1984,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 2016,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 2016,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 2048,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 2048,
+    y: 352
+  }, {
+    type: "sprite-rock",
+    x: 2080,
+    y: 320
+  }, {
+    type: "sprite-rock",
+    x: 2080,
+    y: 352
+  }, {
+    x: 2080,
+    y: 64,
+    type: "sprite-win"
   }]
 };
 ;// CONCATENATED MODULE: ./node_modules/.pnpm/ant-design-vue@4.2.3_vue@3.2.13/node_modules/ant-design-vue/es/vc-trigger/interface.js
@@ -33556,13 +34832,17 @@ const Homevue_type_script_setup_true_lang_js_hoisted_4 = {
 
 
 
+
 /* harmony default export */ var Homevue_type_script_setup_true_lang_js = ({
   setup(__props) {
     const loading = (0,reactivity_esm_bundler/* ref */.KR)(true);
     const showMenu = (0,reactivity_esm_bundler/* ref */.KR)(true);
     const maps = [{
-      title: "官方地图 - 第一关",
+      title: "宁静 - 第一关",
       mapData: data
+    }, {
+      title: "激情 - 第二关",
+      mapData: map2_data
     }];
     const active = (0,reactivity_esm_bundler/* ref */.KR)(maps[0].title);
     function handleAddMap(mapData) {
@@ -33622,10 +34902,10 @@ const Homevue_type_script_setup_true_lang_js_hoisted_4 = {
 });
 ;// CONCATENATED MODULE: ./src/views/Home.vue?vue&type=script&setup=true&lang=js
  
-;// CONCATENATED MODULE: ./node_modules/.pnpm/mini-css-extract-plugin@2.9.0_webpack@5.92.1/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-31.use[0]!./node_modules/.pnpm/css-loader@6.11.0_webpack@5.92.1/node_modules/css-loader/dist/cjs.js??clonedRuleSet-31.use[1]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/.pnpm/postcss-loader@6.2.1_postcss@8.4.39_webpack@5.92.1/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-31.use[2]!./node_modules/.pnpm/less-loader@8.0.0_less@4.0.0_webpack@5.92.1/node_modules/less-loader/dist/cjs.js??clonedRuleSet-31.use[3]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./src/views/Home.vue?vue&type=style&index=0&id=64a18270&lang=less&module=true
+;// CONCATENATED MODULE: ./node_modules/.pnpm/mini-css-extract-plugin@2.9.0_webpack@5.92.1/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-31.use[0]!./node_modules/.pnpm/css-loader@6.11.0_webpack@5.92.1/node_modules/css-loader/dist/cjs.js??clonedRuleSet-31.use[1]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/.pnpm/postcss-loader@6.2.1_postcss@8.4.39_webpack@5.92.1/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-31.use[2]!./node_modules/.pnpm/less-loader@8.0.0_less@4.0.0_webpack@5.92.1/node_modules/less-loader/dist/cjs.js??clonedRuleSet-31.use[3]!./node_modules/.pnpm/vue-loader@17.4.2_vue@3.2.13_webpack@5.92.1/node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./src/views/Home.vue?vue&type=style&index=0&id=30d275c2&lang=less&module=true
 // extracted by mini-css-extract-plugin
-/* harmony default export */ var Homevue_type_style_index_0_id_64a18270_lang_less_module_true = ({"Container":"Home_Container_TvPjS","MenuContainer":"Home_MenuContainer_Jpi4d","Menu":"Home_Menu_RXuZa","Btn":"Home_Btn_oOsOI","Content":"Home_Content_JBjb0","Header":"Home_Header_YYyV4","Game":"Home_Game_OzZ_G","Loading":"Home_Loading_rTSCN","Tip":"Home_Tip_rMaU0"});
-;// CONCATENATED MODULE: ./src/views/Home.vue?vue&type=style&index=0&id=64a18270&lang=less&module=true
+/* harmony default export */ var Homevue_type_style_index_0_id_30d275c2_lang_less_module_true = ({"Container":"Home_Container_TvPjS","MenuContainer":"Home_MenuContainer_Jpi4d","Menu":"Home_Menu_RXuZa","Btn":"Home_Btn_oOsOI","Content":"Home_Content_JBjb0","Header":"Home_Header_YYyV4","Game":"Home_Game_OzZ_G","Loading":"Home_Loading_rTSCN","Tip":"Home_Tip_rMaU0"});
+;// CONCATENATED MODULE: ./src/views/Home.vue?vue&type=style&index=0&id=30d275c2&lang=less&module=true
  
 ;// CONCATENATED MODULE: ./src/views/Home.vue
 
@@ -33633,7 +34913,7 @@ const Homevue_type_script_setup_true_lang_js_hoisted_4 = {
 
 const Home_cssModules = {}
 ;
-Home_cssModules["$style"] = Homevue_type_style_index_0_id_64a18270_lang_less_module_true
+Home_cssModules["$style"] = Homevue_type_style_index_0_id_30d275c2_lang_less_module_true
 
 ;
 const Home_exports_ = /*#__PURE__*/(0,exportHelper/* default */.A)(Homevue_type_script_setup_true_lang_js, [['__cssModules',Home_cssModules]])
@@ -33643,4 +34923,4 @@ const Home_exports_ = /*#__PURE__*/(0,exportHelper/* default */.A)(Homevue_type_
 /***/ })
 
 }]);
-//# sourceMappingURL=Home.7e23bd3c.js.map
+//# sourceMappingURL=Home.2ab3ebc5.js.map
