@@ -60,14 +60,20 @@ import { loadAllResources } from "@/super-mario/utils/loadResources";
 import Mario from "@/components/mario.vue";
 import Menu from "@/components/menu.vue";
 import { data as mapData1 } from "../maps/map1";
+import { data as mapData2 } from "../maps/map2";
+
 import { Popover } from "ant-design-vue";
 
 const loading = ref(true);
 const showMenu = ref(true);
 const maps = [
   {
-    title: "官方地图 - 第一关",
+    title: "宁静 - 第一关",
     mapData: mapData1,
+  },
+  {
+    title: "激情 - 第二关",
+    mapData: mapData2,
   },
 ];
 const active = ref(maps[0].title);

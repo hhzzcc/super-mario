@@ -147,6 +147,7 @@ function getGridBackground({ x, y }) {
 function handleFinish() {
   const mapData = map.serialization(renderer.scene);
 
+  console.log(mapData);
   let maxX = 0;
   mapData.data.forEach((v) => {
     maxX = Math.max(v.x, maxX);

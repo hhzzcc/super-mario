@@ -4,6 +4,7 @@ import { SpriteBadMushroom } from "../sprite/sprite-bad-mushroom";
 import { SpriteGrowMushroom } from "../sprite/sprite-grow-mushroom";
 import { SpriteFlower } from "../sprite/sprite-flower";
 import { SpriteStone } from "../sprite/sprite-stone";
+import { SpriteTurtle } from "../sprite/sprite-turtle";
 
 export class Score {
   children = [];
@@ -48,7 +49,7 @@ export class Score {
       sprite instanceof SpriteFlower
     ) {
       score = 2000;
-    } else if (sprite instanceof SpriteStone) {
+    } else {
       score = 200;
     }
 

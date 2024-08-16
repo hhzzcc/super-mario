@@ -28,9 +28,11 @@ import { SpriteAsk } from "@/super-mario/sprite/sprite-ask";
 import { SpriteBadMushroom } from "@/super-mario/sprite/sprite-bad-mushroom";
 import { SpriteFlower } from "@/super-mario/sprite/sprite-flower";
 import { SpriteGrowMushroom } from "@/super-mario/sprite/sprite-grow-mushroom";
+import { SpriteHorror } from "@/super-mario/sprite/sprite-horror";
 import { SpriteLand } from "@/super-mario/sprite/sprite-land";
 import { SpriteRock } from "@/super-mario/sprite/sprite-rock";
 import { SpriteStone } from "@/super-mario/sprite/sprite-stone";
+import { SpriteTurtle } from "@/super-mario/sprite/sprite-turtle";
 import { Button } from "ant-design-vue";
 import { onMounted, defineEmits } from "vue";
 
@@ -111,6 +113,30 @@ const list = [
     imgs: ["imgs/bad/mushroom/frame-1.jpg"],
     handler(scene, x, y) {
       const sprite = new SpriteBadMushroom({
+        x,
+        y,
+      });
+      sprite.vx = 0;
+      scene.addDynamicSprites(sprite);
+    },
+  },
+
+  {
+    imgs: ["imgs/bad/horror/frame-1.jpg"],
+    handler(scene, x, y) {
+      const sprite = new SpriteHorror({
+        x,
+        y,
+      });
+      sprite.vx = 0;
+      scene.addDynamicSprites(sprite);
+    },
+  },
+
+  {
+    imgs: ["imgs/bad/turtle/frame-1.jpg"],
+    handler(scene, x, y) {
+      const sprite = new SpriteTurtle({
         x,
         y,
       });

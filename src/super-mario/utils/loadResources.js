@@ -142,6 +142,28 @@ function loadSpriteBadMushroomResources() {
   ]);
 }
 
+function loadSpriteHorrorResources() {
+  return loadImages([
+    "imgs/bad/horror/frame-1.jpg",
+    "imgs/bad/horror/frame-2.jpg",
+    "imgs/bad/horror/die-frame-1.jpg",
+    "imgs/bad/horror/die-frame-2.jpg",
+  ]);
+}
+
+function loadSpriteTurtleResources() {
+  return loadImages([
+    "imgs/bad/turtle/frame-1.jpg",
+    "imgs/bad/turtle/frame-2.jpg",
+    "imgs/bad/turtle/hide-frame-1.jpg",
+    "imgs/bad/turtle/hide-frame-2.jpg",
+    "imgs/bad/turtle/die-frame-1.jpg",
+    "imgs/bad/turtle/die-frame-2.jpg",
+    "imgs/bad/turtle/fly-frame-1.jpg",
+    "imgs/bad/turtle/fly-frame-2.jpg",
+  ]);
+}
+
 function loadSpriteBulletResources() {
   return loadImages([
     "imgs/bullet/frame-1.jpg",
@@ -165,6 +187,8 @@ export let spriteFlowerResources;
 export let spriteGoldResources;
 export let spriteGrowMushroomResources;
 export let spriteBadMushroomResources;
+export let spriteHorrorResources;
+export let spriteTurtleResources;
 export let spriteWinResources;
 
 export async function loadAllResources() {
@@ -183,6 +207,8 @@ export async function loadAllResources() {
     spriteGoldResources,
     spriteGrowMushroomResources,
     spriteBadMushroomResources,
+    spriteHorrorResources,
+    spriteTurtleResources,
     spriteWinResources,
   ] = await Promise.all([
     loadBackgroundResources(),
@@ -199,6 +225,8 @@ export async function loadAllResources() {
     loadSpriteGoldResources(),
     loadSpriteGrowMushroomResources(),
     loadSpriteBadMushroomResources(),
+    loadSpriteHorrorResources(),
+    loadSpriteTurtleResources(),
     loadSpriteWinResources(),
   ]);
 }

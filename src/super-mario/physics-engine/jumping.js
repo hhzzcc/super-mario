@@ -19,6 +19,8 @@ export class Jumping {
       }
       return;
     }
+
+    sprite.vy = 0;
     const item = {
       // 初速度
       v0,

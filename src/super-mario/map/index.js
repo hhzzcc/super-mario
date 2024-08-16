@@ -7,6 +7,8 @@ import { SpriteStone } from "../sprite/sprite-stone";
 import { SpriteWin } from "../sprite/sprite-win";
 import { SpriteGold } from "../sprite/sprite-gold";
 import { SpriteRock } from "../sprite/sprite-rock";
+import { SpriteHorror } from "../sprite/sprite-horror";
+import { SpriteTurtle } from "../sprite/sprite-turtle";
 
 function toKebabCase(str) {
   return str.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
@@ -119,6 +121,23 @@ export class Map {
         case "sprite-bad-mushroom":
           dynamics.push(
             new SpriteBadMushroom({
+              x: v.x,
+              y: v.y,
+            })
+          );
+          break;
+        case "sprite-horror":
+          dynamics.push(
+            new SpriteHorror({
+              x: v.x,
+              y: v.y,
+            })
+          );
+          break;
+
+        case "sprite-turtle":
+          dynamics.push(
+            new SpriteTurtle({
               x: v.x,
               y: v.y,
             })

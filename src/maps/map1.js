@@ -6,6 +6,17 @@ export const data = {
       y: 288,
     },
     {
+      type: "sprite-turtle",
+      x: 450,
+      y: 340,
+    },
+
+    {
+      type: "sprite-stone",
+      x: 480,
+      y: 384,
+    },
+    {
       type: "sprite-bad-mushroom",
       x: 800,
       y: 352,
