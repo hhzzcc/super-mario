@@ -8,12 +8,14 @@ export class Camera {
   }
 
   isInView(options) {
-    const { x, y, width, height } = options;
+    let { x, y, width, height } = options;
+
+    // y轴上允许向上超出屏幕200
     return (
       x + width >= this.x &&
       x <= this.x + this.width &&
-      y + height >= this.y &&
-      y <= this.y + this.height
+      y + height >= this.y - 200 &&
+      y <= this.y - 200 + this.height + 200
     );
   }
 }

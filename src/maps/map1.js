@@ -5,8 +5,15 @@ export const data = {
       x: 288,
       y: 288,
     },
+
     {
-      type: "sprite-turtle",
+      type: "sprite-stone",
+      x: 288,
+      y: 384,
+    },
+
+    {
+      type: "sprite-shell",
       x: 450,
       y: 340,
     },

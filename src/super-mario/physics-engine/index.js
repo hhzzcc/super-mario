@@ -55,8 +55,7 @@ export class PhysicsEngine {
           y: dynamicSprite.y,
           width: dynamicSprite.width,
           height: dynamicSprite.height,
-        }) &&
-        dynamicSprite.y < -200
+        })
       ) {
         if (dynamicSprite instanceof SpriteBullet) {
           dynamicSprite.destroy();
@@ -278,6 +277,21 @@ export class PhysicsEngine {
             otherDynamicSprite.y,
             otherDynamicSprite
           );
+        } else if (
+          !isCollectBTop(dynamicSprite, otherDynamicSprite) &&
+          otherDynamicSprite.isHiding()
+        ) {
+          if (dynamicSprite.x <= otherDynamicSprite.x - dynamicSprite.width) {
+            otherDynamicSprite.trampleLeft();
+          } else {
+            otherDynamicSprite.trampleRight();
+          }
+
+          this.onScore(
+            otherDynamicSprite.x,
+            otherDynamicSprite.y,
+            otherDynamicSprite
+          );
         } else {
           dynamicSprite.die();
         }
@@ -315,7 +329,8 @@ export class PhysicsEngine {
 
     // 龟壳击中敌人
     else if (
-      dynamicSprite instanceof SpriteTurtle &&
+      (dynamicSprite instanceof SpriteShell ||
+        dynamicSprite instanceof SpriteTurtle) &&
       dynamicSprite.isAttacking() &&
       (otherDynamicSprite instanceof SpriteHorror ||
         otherDynamicSprite instanceof SpriteBadMushroom ||

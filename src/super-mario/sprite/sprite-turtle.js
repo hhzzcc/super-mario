@@ -29,6 +29,10 @@ export class SpriteTurtle extends DynamicSprite {
     return (this.vx !== 0) & (this.type === "hide");
   }
 
+  isHiding() {
+    return (this.vx === 0) & (this.type === "hide");
+  }
+
   trampleLeft() {
     this.frame = 0;
 
@@ -90,12 +94,20 @@ export class SpriteTurtle extends DynamicSprite {
     this.x += this.vx;
     this.y += this.vy;
 
-    context.drawImage(
-      resource,
-      this.x - camera.x,
-      this.y,
-      this.width,
-      this.height
-    );
+    if (this.vx > 0) {
+      context.save();
+      context.translate(this.x - camera.x + this.width, this.y);
+      context.scale(-1, 1);
+      context.drawImage(resource, 0, 0, this.width, this.height);
+      context.restore();
+    } else {
+      context.drawImage(
+        resource,
+        this.x - camera.x,
+        this.y,
+        this.width,
+        this.height
+      );
+    }
   }
 }
