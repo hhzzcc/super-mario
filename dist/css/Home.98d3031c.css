@@ -114,13 +114,38 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
+}
+.menu_Content_reEtU {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100% - 240px);
   overflow: auto;
+}
+.menu_QRcode_CLGGa {
+  height: 240px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.menu_QRcode_CLGGa > img {
+  width: 150px;
+  height: 150px;
+  border-radius: 6px;
+}
+.menu_QRcode_CLGGa > div {
+  color: #fff;
+  text-align: center;
+  margin-top: 10px;
+  font-weight: bold;
 }
 .menu_Item_nOPQ7 {
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 6px;
+  min-height: 100px;
   height: 100px;
   width: 216px;
   cursor: pointer;

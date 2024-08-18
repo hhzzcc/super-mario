@@ -20,7 +20,7 @@
       <div :class="$style.Header">
         <a href="https://github.com/hhzzcc/super-mario">Github</a>
 
-        <Popover>
+        <!-- <Popover>
           <template #content>
             <img
               src="https://aiad-prod.oss-cn-heyuan.aliyuncs.com/public/783dac4cf0234219876add4eb68bc5f4.jpg"
@@ -29,7 +29,7 @@
           <a style="margin-left: 10px" href="javascript:void(0)"
             >🔥领外卖打车券</a
           >
-        </Popover>
+        </Popover> -->
       </div>
       <div :class="$style.Game">
         <div v-if="loading" :class="$style.Loading">资源加载中...</div>
