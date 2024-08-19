@@ -28,6 +28,7 @@ import { SIZE } from "@/super-mario/constants";
 import { SpriteAsk } from "@/super-mario/sprite/sprite-ask";
 import { SpriteBadMushroom } from "@/super-mario/sprite/sprite-bad-mushroom";
 import { SpriteFlower } from "@/super-mario/sprite/sprite-flower";
+import { SpriteGold } from "@/super-mario/sprite/sprite-gold";
 import { SpriteGrowMushroom } from "@/super-mario/sprite/sprite-grow-mushroom";
 import { SpriteHorror } from "@/super-mario/sprite/sprite-horror";
 import { SpriteLand } from "@/super-mario/sprite/sprite-land";
@@ -116,6 +117,19 @@ const list = [
     handler(scene, x, y) {
       scene.addStaticSprites(
         new SpriteRock({
+          x,
+          y,
+        })
+      );
+    },
+  },
+  {
+    imgs: ["imgs/props/gold/frame-3.jpg"],
+    width: 1,
+    height: 1,
+    handler(scene, x, y) {
+      scene.addStaticSprites(
+        new SpriteGold({
           x,
           y,
         })
