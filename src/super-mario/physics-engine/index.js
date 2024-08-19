@@ -122,7 +122,7 @@ export class PhysicsEngine {
       }
 
       // 使用包围盒做碰撞检测，提升性能
-      const boxX = (~~(dynamicSprite.x / SIZE) - 1) * SIZE;
+      const boxX = (~~(dynamicSprite.x / SIZE) - 2) * SIZE;
       const boxY = 0;
       const boxWidth = (Math.ceil(dynamicSprite.width / SIZE) + 2) * SIZE;
       const boxHeight = camera.height;
@@ -186,14 +186,11 @@ export class PhysicsEngine {
               ) {
                 staticSprite.hit();
               }
-            }
-            if (isCollectBTop(dynamicSprite, staticSprite)) {
+            } else if (isCollectBTop(dynamicSprite, staticSprite)) {
               collectTops.push(staticSprite);
-            }
-            if (isCollectBRight(dynamicSprite, staticSprite)) {
+            } else if (isCollectBRight(dynamicSprite, staticSprite)) {
               collectRights.push(staticSprite);
-            }
-            if (isCollectBLeft(dynamicSprite, staticSprite)) {
+            } else if (isCollectBLeft(dynamicSprite, staticSprite)) {
               collectLefts.push(staticSprite);
             }
           }

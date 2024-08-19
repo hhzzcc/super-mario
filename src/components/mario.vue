@@ -192,11 +192,29 @@ function handleAddSprite(item) {
       const maxX = Math.max(startCheckPosition.value.x, x);
       const maxY = Math.max(startCheckPosition.value.y, y);
 
-      for (let i = minX; i <= maxX; i += SIZE) {
-        for (let j = minY; j <= maxY; j += SIZE) {
-          mulCheckSprit.value.handler(renderer.scene, renderer.camera.x + i, j);
+      for (let i = minX; i <= maxX; i += SIZE * mulCheckSprit.value.width) {
+        if (mulCheckSprit.value.height === "auto") {
+          mulCheckSprit.value.handler(
+            renderer.scene,
+            renderer.camera.x + i,
+            startCheckPosition.value.y,
+            maxY - minY + SIZE
+          );
+        } else {
+          for (
+            let j = minY;
+            j <= maxY;
+            j += SIZE * mulCheckSprit.value.height
+          ) {
+            mulCheckSprit.value.handler(
+              renderer.scene,
+              renderer.camera.x + i,
+              j
+            );
+          }
         }
       }
+
       startCheckPosition.value = undefined;
     }
   }

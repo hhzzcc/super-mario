@@ -1,27 +1,30 @@
+import { SIZE } from "@/super-mario/constants";
+
 export const data = {
   data: [
+    // {
+    //   type: "sprite-grow-mushroom",
+    //   x: 288,
+    //   y: 288,
+    // },
+
+    // {
+    //   type: "sprite-stone",
+    //   x: 288,
+    //   y: 384,
+    // },
+
+    // {
+    //   type: "sprite-shell",
+    //   x: 450,
+    //   y: 340,
+    // },
+
     {
-      type: "sprite-grow-mushroom",
+      type: "sprite-pipe",
       x: 288,
       y: 288,
-    },
-
-    {
-      type: "sprite-stone",
-      x: 288,
-      y: 384,
-    },
-
-    {
-      type: "sprite-shell",
-      x: 450,
-      y: 340,
-    },
-
-    {
-      type: "sprite-stone",
-      x: 480,
-      y: 384,
+      height: 4 * SIZE,
     },
     {
       type: "sprite-bad-mushroom",
@@ -248,36 +251,36 @@ export const data = {
       x: 448,
       y: 448,
     },
-    {
-      type: "sprite-stone",
-      x: 192,
-      y: 288,
-    },
-    {
-      type: "sprite-stone",
-      x: 224,
-      y: 288,
-    },
-    {
-      type: "sprite-stone",
-      x: 256,
-      y: 288,
-    },
-    {
-      type: "sprite-ask",
-      x: 288,
-      y: 288,
-    },
-    {
-      type: "sprite-stone",
-      x: 320,
-      y: 288,
-    },
-    {
-      type: "sprite-stone",
-      x: 352,
-      y: 288,
-    },
+    // {
+    //   type: "sprite-stone",
+    //   x: 192,
+    //   y: 288,
+    // },
+    // {
+    //   type: "sprite-stone",
+    //   x: 224,
+    //   y: 288,
+    // },
+    // {
+    //   type: "sprite-stone",
+    //   x: 256,
+    //   y: 288,
+    // },
+    // {
+    //   type: "sprite-ask",
+    //   x: 288,
+    //   y: 288,
+    // },
+    // {
+    //   type: "sprite-stone",
+    //   x: 320,
+    //   y: 288,
+    // },
+    // {
+    //   type: "sprite-stone",
+    //   x: 352,
+    //   y: 288,
+    // },
     {
       type: "sprite-land",
       x: 576,

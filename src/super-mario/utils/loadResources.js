@@ -108,6 +108,13 @@ function loadSpriteWinResources() {
   ]);
 }
 
+function loadSpritePipeResources() {
+  return loadImages([
+    "imgs/building/pipe/normal.jpg",
+    "imgs/building/pipe/fragment.jpg",
+  ]);
+}
+
 function loadSpriteFlowerResources() {
   return loadImages([
     "imgs/props/flow/frame-1.jpg",
@@ -199,6 +206,7 @@ export let spriteHorrorResources;
 export let spriteTurtleResources;
 export let spriteShellResources;
 export let spriteWinResources;
+export let spritePipeResources;
 
 export async function loadAllResources() {
   [
@@ -220,6 +228,7 @@ export async function loadAllResources() {
     spriteTurtleResources,
     spriteShellResources,
     spriteWinResources,
+    spritePipeResources,
   ] = await Promise.all([
     loadBackgroundResources(),
     loadBaseMarioResources(),
@@ -239,5 +248,6 @@ export async function loadAllResources() {
     loadSpriteTurtleResources(),
     loadSpriteShellResources(),
     loadSpriteWinResources(),
+    loadSpritePipeResources(),
   ]);
 }

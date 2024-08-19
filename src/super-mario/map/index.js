@@ -10,6 +10,7 @@ import { SpriteRock } from "../sprite/sprite-rock";
 import { SpriteHorror } from "../sprite/sprite-horror";
 import { SpriteTurtle } from "../sprite/sprite-turtle";
 import { SpriteShell } from "../sprite/sprite-shell";
+import { SpritePipe } from "../sprite/sprite-pipe";
 
 function toKebabCase(str) {
   return str.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
@@ -32,11 +33,20 @@ export class Map {
     });
 
     scene.staticSprites.forEach((sprite) => {
-      mapData.data.push({
-        type: toKebabCase(sprite.constructor.name),
-        x: sprite.x,
-        y: sprite.y,
-      });
+      if (sprite instanceof SpritePipe) {
+        mapData.data.push({
+          type: toKebabCase(sprite.constructor.name),
+          x: sprite.x,
+          y: sprite.y,
+          height: sprite.height,
+        });
+      } else {
+        mapData.data.push({
+          type: toKebabCase(sprite.constructor.name),
+          x: sprite.x,
+          y: sprite.y,
+        });
+      }
     });
 
     return mapData;
@@ -101,6 +111,17 @@ export class Map {
               y: v.y,
             })
           );
+          break;
+
+        case "sprite-pipe":
+          statics.push(
+            new SpritePipe({
+              x: v.x,
+              y: v.y,
+              height: v.height,
+            })
+          );
+
           break;
         case "sprite-flower":
           dynamics.push(

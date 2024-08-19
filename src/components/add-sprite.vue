@@ -30,6 +30,7 @@ import { SpriteFlower } from "@/super-mario/sprite/sprite-flower";
 import { SpriteGrowMushroom } from "@/super-mario/sprite/sprite-grow-mushroom";
 import { SpriteHorror } from "@/super-mario/sprite/sprite-horror";
 import { SpriteLand } from "@/super-mario/sprite/sprite-land";
+import { SpritePipe } from "@/super-mario/sprite/sprite-pipe";
 import { SpriteRock } from "@/super-mario/sprite/sprite-rock";
 import { SpriteShell } from "@/super-mario/sprite/sprite-shell";
 import { SpriteStone } from "@/super-mario/sprite/sprite-stone";
@@ -41,6 +42,8 @@ const emits = defineEmits(["check", "mul-check", "finish"]);
 const list = [
   {
     imgs: ["imgs/building/land/land.jpg"],
+    width: 1,
+    height: 1,
     handler(scene, x, y) {
       scene.addStaticSprites(
         new SpriteLand({
@@ -55,6 +58,8 @@ const list = [
       "imgs/building/ask/frame-4.jpg",
       "imgs/props/grow-mushroom/frame-1.jpg",
     ],
+    width: 1,
+    height: 1,
     handler(scene, x, y) {
       scene.addStaticSprites(
         new SpriteAsk({
@@ -72,6 +77,8 @@ const list = [
   },
   {
     imgs: ["imgs/building/ask/frame-4.jpg", "imgs/props/flow/frame-1.jpg"],
+    width: 1,
+    height: 1,
     handler(scene, x, y) {
       scene.addStaticSprites(
         new SpriteAsk({
@@ -89,6 +96,8 @@ const list = [
   },
   {
     imgs: ["imgs/building/stone/stone.jpg"],
+    width: 1,
+    height: 1,
     handler(scene, x, y) {
       scene.addStaticSprites(
         new SpriteStone({
@@ -100,6 +109,8 @@ const list = [
   },
   {
     imgs: ["imgs/building/rock/rock.jpg"],
+    width: 1,
+    height: 1,
     handler(scene, x, y) {
       scene.addStaticSprites(
         new SpriteRock({
@@ -109,9 +120,25 @@ const list = [
       );
     },
   },
+  {
+    imgs: ["imgs/building/pipe/normal.jpg"],
+    width: 2,
+    height: "auto",
+    handler(scene, x, y, height) {
+      const sprite = new SpritePipe({
+        x,
+        y,
+        height,
+      });
+      sprite.vx = 0;
+      scene.addStaticSprites(sprite);
+    },
+  },
 
   {
     imgs: ["imgs/bad/mushroom/frame-1.jpg"],
+    width: 1,
+    height: 1,
     handler(scene, x, y) {
       const sprite = new SpriteBadMushroom({
         x,
@@ -124,6 +151,8 @@ const list = [
 
   {
     imgs: ["imgs/bad/horror/frame-1.jpg"],
+    width: 1,
+    height: 1,
     handler(scene, x, y) {
       const sprite = new SpriteHorror({
         x,
@@ -136,6 +165,8 @@ const list = [
 
   {
     imgs: ["imgs/bad/turtle/frame-1.jpg"],
+    width: 1,
+    height: 1,
     handler(scene, x, y) {
       const sprite = new SpriteTurtle({
         x,
@@ -147,6 +178,8 @@ const list = [
   },
   {
     imgs: ["imgs/bad/shell/frame-1.jpg"],
+    width: 1,
+    height: 1,
     handler(scene, x, y) {
       const sprite = new SpriteShell({
         x,

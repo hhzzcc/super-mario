@@ -1,36 +1,52 @@
+const collectBTop = (a, b) => {
+  return a.vy > 0 && a.y + a.height <= b.y;
+};
+
+const collectBBottom = (a, b) => {
+  return a.vy < 0 && a.y >= b.y + b.height;
+};
+
+const collectBLeft = (a, b) => {
+  return a.vx > 0 && a.x + a.width <= b.x;
+};
+
+const collectBRight = (a, b) => {
+  return a.vx < 0 && a.x >= b.x + b.width;
+};
+
 export const isCollectBTop = (a, b) => {
   return (
-    a.vy > 0 &&
-    a.y + a.height <= b.y &&
-    a.x + a.width !== b.x &&
-    a.x !== b.x + b.width
+    collectBTop(a, b) &&
+    !collectBBottom(a, b) &&
+    !collectBLeft(a, b) &&
+    !collectBRight(a, b)
   );
 };
 
 export const isCollectBBottom = (a, b) => {
   return (
-    a.vy < 0 &&
-    a.y >= b.y + b.height &&
-    a.x + a.width !== b.x &&
-    a.x !== b.x + b.width
+    collectBBottom(a, b) &&
+    !collectBTop(a, b) &&
+    !collectBLeft(a, b) &&
+    !collectBRight(a, b)
   );
 };
 
 export const isCollectBLeft = (a, b) => {
   return (
-    a.vx > 0 &&
-    a.x + a.width <= b.x &&
-    a.y + a.height !== b.y &&
-    a.y !== b.y + b.height
+    collectBLeft(a, b) &&
+    !collectBRight(a, b) &&
+    !collectBTop(a, b) &&
+    !collectBBottom(a, b)
   );
 };
 
 export const isCollectBRight = (a, b) => {
   return (
-    a.vx < 0 &&
-    a.x >= b.x + b.width &&
-    a.y + a.height !== b.y &&
-    a.y !== b.y + b.height
+    collectBRight(a, b) &&
+    !collectBLeft(a, b) &&
+    !collectBTop(a, b) &&
+    !collectBBottom(a, b)
   );
 };
 
