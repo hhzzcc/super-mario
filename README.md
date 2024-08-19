@@ -30,11 +30,12 @@
 
 ### 正常界面
 
-![image](https://github.com/user-attachments/assets/1bff6c6c-e9aa-49f7-8216-0ef92cdf63ba)
+![image](https://github.com/user-attachments/assets/0687ea83-9e7e-49f3-ba62-25f8219c27e3)
+
 
 ### 编辑地图
 
-![image](https://github.com/user-attachments/assets/b6a38713-1d3b-4838-a8e6-488eae8a6601)
+![image](https://github.com/user-attachments/assets/a3217aef-5040-40a3-b8fd-0d7dbc578a9e)
 
 
 ## 项目运行
