@@ -30,8 +30,7 @@
 
 ### 正常界面
 
-![image](https://github.com/user-attachments/assets/066db67c-8cc5-45b3-84b8-be3a0a37b02a)
-
+![image](https://github.com/user-attachments/assets/1bff6c6c-e9aa-49f7-8216-0ef92cdf63ba)
 
 ### 编辑地图
 
