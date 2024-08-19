@@ -24,6 +24,7 @@
 </template>
 
 <script setup>
+import { SIZE } from "@/super-mario/constants";
 import { SpriteAsk } from "@/super-mario/sprite/sprite-ask";
 import { SpriteBadMushroom } from "@/super-mario/sprite/sprite-bad-mushroom";
 import { SpriteFlower } from "@/super-mario/sprite/sprite-flower";
@@ -31,6 +32,7 @@ import { SpriteGrowMushroom } from "@/super-mario/sprite/sprite-grow-mushroom";
 import { SpriteHorror } from "@/super-mario/sprite/sprite-horror";
 import { SpriteLand } from "@/super-mario/sprite/sprite-land";
 import { SpritePipe } from "@/super-mario/sprite/sprite-pipe";
+import { SpritePipeFlower } from "@/super-mario/sprite/sprite-pipe-flower";
 import { SpriteRock } from "@/super-mario/sprite/sprite-rock";
 import { SpriteShell } from "@/super-mario/sprite/sprite-shell";
 import { SpriteStone } from "@/super-mario/sprite/sprite-stone";
@@ -130,8 +132,28 @@ const list = [
         y,
         height,
       });
-      sprite.vx = 0;
       scene.addStaticSprites(sprite);
+    },
+  },
+  {
+    imgs: ["imgs/building/pipe/normal.jpg", "imgs/bad/flower/frame-1.jpg"],
+    width: 2,
+    height: "auto",
+    handler(scene, x, y, height) {
+      scene.addStaticSprites(
+        new SpritePipe({
+          x,
+          y,
+          height,
+        })
+      );
+
+      const spritePipeFlower = new SpritePipeFlower({
+        x: x + SIZE / 2,
+        y,
+      });
+      scene.addDynamicSprites(spritePipeFlower);
+      spritePipeFlower.unMove();
     },
   },
 

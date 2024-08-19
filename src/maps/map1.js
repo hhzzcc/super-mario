@@ -14,12 +14,17 @@ export const data = {
     //   y: 384,
     // },
 
-    // {
-    //   type: "sprite-shell",
-    //   x: 450,
-    //   y: 340,
-    // },
+    {
+      type: "sprite-shell",
+      x: 450,
+      y: 340,
+    },
 
+    {
+      type: "sprite-pipe-flower",
+      x: 288 + SIZE / 2,
+      y: 288,
+    },
     {
       type: "sprite-pipe",
       x: 288,

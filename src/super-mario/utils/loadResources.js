@@ -115,6 +115,13 @@ function loadSpritePipeResources() {
   ]);
 }
 
+function loadSpritePipeFlowerResources() {
+  return loadImages([
+    "imgs/bad/flower/frame-1.jpg",
+    "imgs/bad/flower/frame-2.jpg",
+  ]);
+}
+
 function loadSpriteFlowerResources() {
   return loadImages([
     "imgs/props/flow/frame-1.jpg",
@@ -207,6 +214,7 @@ export let spriteTurtleResources;
 export let spriteShellResources;
 export let spriteWinResources;
 export let spritePipeResources;
+export let spritePipeFlowerResources;
 
 export async function loadAllResources() {
   [
@@ -229,6 +237,7 @@ export async function loadAllResources() {
     spriteShellResources,
     spriteWinResources,
     spritePipeResources,
+    spritePipeFlowerResources,
   ] = await Promise.all([
     loadBackgroundResources(),
     loadBaseMarioResources(),
@@ -249,5 +258,6 @@ export async function loadAllResources() {
     loadSpriteShellResources(),
     loadSpriteWinResources(),
     loadSpritePipeResources(),
+    loadSpritePipeFlowerResources(),
   ]);
 }

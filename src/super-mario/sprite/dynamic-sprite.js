@@ -10,6 +10,7 @@ export class DynamicSprite {
     this.vy = vy;
     this.width = width;
     this.height = height;
+    this.isPhysics = true;
   }
 
   active() {
@@ -18,6 +19,10 @@ export class DynamicSprite {
 
   unActive() {
     this.isActive = false;
+  }
+
+  unPhysics() {
+    this.isPhysics = false;
   }
 
   destroy() {

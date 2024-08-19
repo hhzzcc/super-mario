@@ -22,6 +22,8 @@ import { SIZE, G } from "../constants";
 import { SpriteHorror } from "../sprite/sprite-horror";
 import { SpriteTurtle } from "../sprite/sprite-turtle";
 import { SpriteShell } from "../sprite/sprite-shell";
+import { SpritePipe } from "../sprite/sprite-pipe";
+import { SpritePipeFlower } from "../sprite/sprite-pipe-flower";
 
 const handleMarioAttack = throttle((scene, mario) => {
   const bullet = mario.attack();
@@ -94,7 +96,12 @@ export class PhysicsEngine {
       }
 
       // 自由落体
-      else if (!(dynamicSprite instanceof SpriteBullet)) {
+      else if (
+        !(
+          dynamicSprite instanceof SpriteBullet ||
+          dynamicSprite instanceof SpritePipeFlower
+        )
+      ) {
         // 最大速度不超过10
         dynamicSprite.vy = Math.min(10, dynamicSprite.vy + G);
       }
@@ -140,6 +147,7 @@ export class PhysicsEngine {
           if (
             staticSprite &&
             !staticSprite.isDestroy &&
+            dynamicSprite.isPhysics &&
             isCollect(dynamicSprite, staticSprite)
           ) {
             // 胜利
@@ -293,7 +301,8 @@ export class PhysicsEngine {
           dynamicSprite.die();
         }
       } else if (
-        otherDynamicSprite instanceof SpriteHorror &&
+        (otherDynamicSprite instanceof SpriteHorror ||
+          otherDynamicSprite instanceof SpritePipeFlower) &&
         otherDynamicSprite.isActive
       ) {
         dynamicSprite.die();
@@ -305,6 +314,7 @@ export class PhysicsEngine {
       dynamicSprite instanceof SpriteBullet &&
       (otherDynamicSprite instanceof SpriteBadMushroom ||
         otherDynamicSprite instanceof SpriteHorror ||
+        otherDynamicSprite instanceof SpritePipeFlower ||
         otherDynamicSprite instanceof SpriteTurtle ||
         otherDynamicSprite instanceof SpriteShell) &&
       otherDynamicSprite.isActive
@@ -313,7 +323,8 @@ export class PhysicsEngine {
 
       if (
         otherDynamicSprite instanceof SpriteBadMushroom ||
-        otherDynamicSprite instanceof SpriteTurtle
+        otherDynamicSprite instanceof SpriteTurtle ||
+        otherDynamicSprite instanceof SpritePipeFlower
       ) {
         otherDynamicSprite.dieByBullet();
         this.onScore(
@@ -330,6 +341,7 @@ export class PhysicsEngine {
         dynamicSprite instanceof SpriteTurtle) &&
       dynamicSprite.isAttacking() &&
       (otherDynamicSprite instanceof SpriteHorror ||
+        otherDynamicSprite instanceof SpritePipeFlower ||
         otherDynamicSprite instanceof SpriteBadMushroom ||
         otherDynamicSprite instanceof SpriteTurtle ||
         otherDynamicSprite instanceof SpriteShell) &&
